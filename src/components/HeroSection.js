@@ -6,9 +6,9 @@ import './HeroSection.css';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <h1 style="color:blue;">WE FOR YOU</h1>
-      <p>Welcome to Our Home Care Services!!</p>
-      <div class="line">Our Services include ElderCare, BabyCare, Maids Service, Elder and Baby HealthCare Services</div><br></br>
+      <h1 className='greentext'>WE FOR YOU</h1>
+      <p className="line1">Welcome to Our Home Care Services!!</p>
+      <div className="line2">Our Services include ElderCare, BabyCare, Maids Service, Elder and Baby HealthCare Services</div><br></br>
       <div className='hero-btns'>
         <Button
           className='btns'
