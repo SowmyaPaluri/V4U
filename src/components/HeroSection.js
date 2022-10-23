@@ -12,6 +12,7 @@ function HeroSection() {
       <div className='hero-btns'>
         <Button
           className='btns'
+          variant="outline-success"
           buttonStyle='btn--outline'
           buttonSize='btn--large'
         >

@@ -28,6 +28,9 @@
   display: flex;
   align-items: center;
 }
+.navbar-logo:hover {
+  color:#fff;
+}
 
 .fa-typo3 {
   margin-left: 0.5rem;
@@ -59,6 +62,7 @@
 }
 
 .nav-links:hover {
+  color:#fff;
   border-bottom: 4px solid #fff;
   transition: all 0.2s ease-out;
 }
@@ -70,7 +74,6 @@
 .nav-links-mobile {
   display: none;
 }
-
 .menu-icon {
   display: none;
 }
