@@ -42,5 +42,8 @@
   transition: 250ms;
 }
 .btns{
-  color: black;
+  color: white;
+}
+.btn-mobile{
+  color: #fff;
 }
