@@ -7,6 +7,8 @@ import {collection, getDocs, updateDoc, query, where, doc, onSnapshot} from 'fir
 import { auth, db, logout } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import Unauthorised from './Unauthorised';
+import ServiceForm from './ServiceForm';
 
 const AddService = () =>{
     const [user, loading, error] = useAuthState(auth);
@@ -23,7 +25,7 @@ const AddService = () =>{
         console.log(1234);
         onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
-            console.log(doc.data().state);
+            setState(doc.data().state);
             })
         });
       }, [user, loading]);
@@ -38,7 +40,7 @@ const AddService = () =>{
 //       };
 //       getUsers(); 
 //   }, []);
-console.log("out");
+console.log(state);
 // useEffect(() => {
     // const getUsers = async () => {
     // const data = await getDocs(q);
@@ -60,7 +62,9 @@ console.log("out");
  
     return(
         <div>
-            <h1>ADD</h1>
+            {state == 2002 && <Unauthorised />}
+            {state == 2001 && <ServiceForm />}
+            {/* <h1>ADD</h1> */}
         </div>
     )
 }

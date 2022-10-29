@@ -56,7 +56,7 @@ function Dashboard() {
       // const data = doc.docs[0].data();
       // console.log(matchedUsers);
       // setName(data.name);
-      console.log(123);
+      // console.log(123);
       console.log(data)
       try{
         data.forEach( async (user) => {

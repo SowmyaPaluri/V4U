@@ -7,6 +7,7 @@ import LoginMain from './components/pages/LoginMain';
 import Services from './components/pages/Services';
 import Book from './components/pages/Book';
 import AddService from './components/pages/AddService';
+import Unauthorised from './components/pages/Unauthorised';
 //import Login from './components/pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/services' element={<Services />} />
           <Route path='/book' element={<Book />} />
           <Route path='/addservice' element={<AddService />} />
+          <Route path='/unauthorised' element={<Unauthorised />} />
         </Routes>
       </Router>
     </>
