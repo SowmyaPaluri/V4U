@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { Link,useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
@@ -10,6 +10,11 @@ function Navbar() {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = '/signupmain'; 
+    navigate(path);
+  }
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -79,7 +84,7 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {button && <Button onClick={routeChange} variant="light" size='md'>SIGN UP</Button>}
         </div>
       </nav>
     </>
