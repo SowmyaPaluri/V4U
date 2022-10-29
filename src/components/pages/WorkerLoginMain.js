@@ -3,18 +3,18 @@ import { Container } from "react-bootstrap";
 import "../../App.css";
 //import LoginHome from "./LoginHome";
 //import Login from "./Login";
-import Login from "./Login";
+import WorkerLogin from "./WorkerLogin";
 //import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
 
-function LoginMain() {
+function WorkerLoginMain() {
   return (
     <Container style={{ width: "400px" }}>
           <UserAuthContextProvider>
-              <Login />
+              <WorkerLogin />
           </UserAuthContextProvider>
     </Container>
   );
 }
 
-export default LoginMain;
+export default WorkerLoginMain;

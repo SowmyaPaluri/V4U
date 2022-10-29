@@ -1,19 +1,19 @@
-import { Firestore } from 'firebase/firestore';
-import firebase from 'firebase/compat/app';
+//import { Firestore } from 'firebase/firestore';
+//import firebase from 'firebase/compat/app';
 // import firebase from "firebase/app";
 import "firebase/firestore";
-import React, {useState, useEffect} from 'react';
-import {collection, getDocs, updateDoc, query, where, doc, onSnapshot} from 'firebase/firestore';
-import { auth, db, logout } from "../../firebase";
+import React, { useEffect, useState} from 'react';
+import {collection, query, where, onSnapshot} from 'firebase/firestore';
+import { auth, db } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
 const AddService = () =>{
-    const [user, loading, error] = useAuthState(auth);
-    const [type, setType] = useState([]);
-    const [state, setState] = useState('');
+    const [user, loading] = useAuthState(auth);
+    //const [type, setType] = useState([]);
+    //const [state, setState] = useState('');
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
+    //const [users, setUsers] = useState([]);
     const email = user ? user?.email: 'undefined';
     const collectionRef = collection(db, 'users');
     useEffect(() => {

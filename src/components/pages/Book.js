@@ -40,15 +40,15 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc } from "firebase/firestore";
 import { useForm } from 'react-hook-form';
-function Dashboard() {
-  const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
-  const [matchedUsers, change] = useState("");
+function Book() {
+  const [user, loading ] = useAuthState(auth);
+  const [ name ] = useState("");
+  const [ change ] = useState("");
   const navigate = useNavigate();
   const [service, changeService] = useState('')
   const [type, changeType] = useState('')
-  const [loc, changeLoc] = useState('')
-  const presentuser = auth.currentUser;
+  //const [loc, changeLoc] = useState('')
+  //const presentuser = auth.currentUser;
   const addToDB = async () => {
       const q = query(collection(db, "users"), where("email", "==", user?.email));
       const data = await getDocs(q);
@@ -79,11 +79,11 @@ function Dashboard() {
   // }
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/loginmain");
+    if (!user) return navigate("/logupmain");
     // fetchUserName();
   }, [user, loading]);
 
-  const {register, reset, errors, handleSubmit} = useForm();
+  const { reset } = useForm();
   const submitHandler = (e) =>{
     e.preventDefault();
     addToDB();
@@ -128,5 +128,5 @@ function Dashboard() {
      </div>
   );
 }
-export default Dashboard;
+export default Book;
 
