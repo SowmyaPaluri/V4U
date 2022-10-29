@@ -3,14 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "./UserAuthContext";
+import { db } from "../../firebase";
+import {collection, addDoc} from 'firebase/firestore';
 //import Login from "./Login.js";
 import '../../App.css';
 //import LoginMain from './LoginMain';
 
+const states = {'client': 2001, 'worker': 2002, 'admin': 2003}
+
 const Signup = () => {
-  const [email, setEmail] = useState("");
+  const [Email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
+  const [Password, setPassword] = useState("");
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
 
@@ -18,8 +22,10 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
-      navigate("/");
+      await signUp(Email, Password);
+      const userCollectionRef = collection(db, "users");
+      await addDoc(userCollectionRef, {email: Email, password: Password, state: states.client})
+      navigate("/Services");
     } catch (err) {
       setError(err.message);
     }
