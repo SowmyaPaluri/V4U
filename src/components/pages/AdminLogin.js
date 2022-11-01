@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "./UserAuthContext";
 
-const Login = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,7 +17,7 @@ const Login = () => {
     setError("");
     try {
       await logIn(email, password);
-      navigate("/Services");
+      navigate("/home");
     } catch (err) {
       setError(err.message);
     }
@@ -77,4 +77,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

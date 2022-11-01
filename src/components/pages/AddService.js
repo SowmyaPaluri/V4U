@@ -1,33 +1,42 @@
-import { Firestore } from 'firebase/firestore';
-import firebase from 'firebase/compat/app';
+//import { Firestore } from 'firebase/firestore';
+//import firebase from 'firebase/compat/app';
 // import firebase from "firebase/app";
 import "firebase/firestore";
-import React, {useState, useEffect} from 'react';
-import {collection, getDocs, updateDoc, query, where, doc, onSnapshot} from 'firebase/firestore';
-import { auth, db, logout } from "../../firebase";
+import React, { useEffect, useState} from 'react';
+import {collection, query, where, onSnapshot} from 'firebase/firestore';
+import { auth, db } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import Unauthorised from './Unauthorised';
 import ServiceForm from './ServiceForm';
 
 const AddService = () =>{
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const [type, setType] = useState([]);
     const [state, setState] = useState('');
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const email = user ? user?.email: 'undefined';
-    const collectionRef = collection(db, 'users');
+    
     useEffect(() => {
         if (loading) return;
-        if (!user ) return navigate("/loginmain");
+        if (!user ) return navigate("/logupmain");
+        const collectionRef = collection(db, 'users');
         const q = query(collectionRef, where('email', '==', email));
         console.log(1234);
         onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
             setState(doc.data().state);
             })
+        });const cR = collection(db, 'workers');
+        const qq = query(cR, where('email', '==', email));
+        console.log(1234);
+        onSnapshot(qq, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+            setState(doc.data().state);
+            })
         });
+
       }, [user, loading]);
     
     
@@ -58,12 +67,12 @@ console.log(state);
 
 // }, []);
     // setState(users[0].state);
-    // console.log(state);
+    console.log(state);
  
     return(
         <div>
-            {state == 2002 && <Unauthorised />}
-            {state == 2001 && <ServiceForm />}
+            {state == 2001 && <Unauthorised />}
+            {state == 2002 && <ServiceForm />}
             {/* <h1>ADD</h1> */}
         </div>
     )

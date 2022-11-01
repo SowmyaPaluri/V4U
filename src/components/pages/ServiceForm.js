@@ -10,6 +10,7 @@ const ServiceForm = () => {
 const [service, setService] = useState('');
 const [type, setType] = useState('');
 const [salary, setSalary] = useState('');
+const [location, setLocation] = useState('');
 const [user, loading, error] = useAuthState(auth);
 // const admin = require("firebase-admin");
 const submitHandler = (e) =>{
@@ -17,23 +18,23 @@ const submitHandler = (e) =>{
     addToDB();
 }
 const addToDB = async () => {
-    const q = query(collection(db, "workers"), where("email", "==", 'sowmi@gmail.com'));
+    const q = query(collection(db, "workers"), where("email", "==", user?.email));
     const data = await getDocs(q);
     console.log(data);
     const userCollectionRef = collection(db, "workers");
 
     try{
-        // console.log(1111);
-        await addDoc(userCollectionRef, {email:'sowmi@gmail.com',
-        services: []});
-    
-      data.forEach( async (worker) => {
-        const getWorker = doc(db, 'workers', worker.id);
-        // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
-        await updateDoc(getWorker, {
-            services: arrayUnion({service: service, type: type, salary: salary})
-        });
-        });
+      
+      const userCollectionRef = collection(db, "services");
+      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location})
+      alert("added succesfully");
+      // data.forEach( async (worker) => {
+      //   const getWorker = doc(db, 'workers', worker.id);
+      //   // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
+      //   await updateDoc(getWorker, {
+      //       Services: arrayUnion({service: service, type: type, salary: salary})
+      //   });
+      //   });
         // console.log(getWorker);
         // console.log(9999)
         // await updateDoc(getWorker, {
@@ -65,8 +66,10 @@ const addToDB = async () => {
              <option>partTime</option>
              <option>fullTime</option>
            </select><br />
-           <label>Expected Salary:</label>
+           <label>Expected Salary per month:</label>
            <input type = "text" onChange={(e) => setSalary(e.target.value)}></input><br />
+           <label>Location:</label>
+           <input type = "text" onChange={(e) => setLocation(e.target.value)}></input><br />
            <input type = "submit"></input>
          </form>
          </center>

@@ -12,7 +12,7 @@ function Navbar() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = '/signupmain'; 
+    let path = '/logupmain'; 
     navigate(path);
   }
   const showButton = () => {
@@ -76,7 +76,7 @@ function Navbar() {
 
             <li>
               <Link
-                to='/signupmain'
+                to='/logupmain'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
