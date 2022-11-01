@@ -1,5 +1,5 @@
 .hero-container {
-  background: url('/public/images/bg4-modified.jpg') center center/cover no-repeat;
+  background: url('../components/pages/images/bg.jpg') center center/cover no-repeat;
   /*filter: blur(8px);
   -webkit-filter: blur(8px);*/
   height: 100vh;

@@ -7,7 +7,7 @@ import WorkerLoginMain from './components/pages/WorkerLoginMain';
 import ClientSignupMain from './components/pages/ClientSignupMain';
 import ClientLoginMain from './components/pages/ClientLoginMain';
 import AdminLoginMain from './components/pages/ClientLoginMain';
-import Services from './components/pages/Services';
+import ServicesShown from './components/pages/ServicesIndex';
 import Book from './components/pages/Book';
 import AddService from './components/pages/AddService';
 import Unauthorised from './components/pages/Unauthorised';
@@ -29,7 +29,7 @@ function App() {
           <Route path='/workersignupmain' element={<WorkerSignupMain />} />
           <Route path='/workerloginmain' element={<WorkerLoginMain />} />
           <Route path='/adminloginmain' element={<AdminLoginMain />} />
-          <Route path='/services' element={<Services />} />
+          <Route path='/servicesIndex' element={<ServicesShown />} />
           <Route path='/book' element={<Book />} />
           <Route path='/addservice' element={<AddService />} />
           <Route path='/unauthorised' element={<Unauthorised />} />
