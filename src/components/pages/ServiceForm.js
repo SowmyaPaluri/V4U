@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../firebase";
-import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion } from "firebase/firestore";
+import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot , sizeInc, deleteDoc} from "firebase/firestore";
+import {
+  ServicesContainer,
+  ServicesH1,
+  ServicesWrapper,
+  ServicesCard,
+  ServicesIcon,
+  ServicesH2,
+  ServicesP
+}from './BookNowElements.js';
 
 const ServiceForm = () => {
 
@@ -12,13 +21,64 @@ const [type, setType] = useState('');
 const [salary, setSalary] = useState('');
 const [location, setLocation] = useState('');
 const [user, loading, error] = useAuthState(auth);
-// const admin = require("firebase-admin");
+const navigate = useNavigate();
+const [services, setServices] = useState([]);
+const collectionRef = collection(db, 'services');
+
+  const q = query(collectionRef, where('workerEmail', '==', user?.email));
+  useEffect(() => {
+    if(loading) return;
+    if (!user) return navigate("/logupmain");
+    const getUsers = async () => {
+    const data = await getDocs(q);
+    setServices(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+  };
+  getUsers(); 
+  }, [user, loading]);
+  console.log(services);
+
+// const [users, setUsers] = useState([]);
+// const userCollectionRef = collection(db, "users");
+// useEffect(() => {
+//   if (loading) return;
+//   if (!user ) return navigate("/logupmain");
+//   const collectionRef = collection(db, 'services');
+//   const q = query(collectionRef, where('workerEmail', '==', user?.email));
+//   console.log(1234);
+//   onSnapshot(q, (querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         // console.log(doc.data().bookedServices);
+//         setServices(doc.data());
+//         console.log(doc.data().workerEmail);
+//       // changeServices(temp);
+//       })
+//       // console.log(temp);
+//   });
+//   console.log(services);
+// }, [user, loading]);
+
+
+function refresh(){
+  window.location.reload(false);
+}
+
+
 const submitHandler = (e) =>{
     e.preventDefault();
     addToDB();
 }
+const deleteHandler = async (e) => {
+  const servicedoc = doc(db, "services", e.id);
+  try{
+    await deleteDoc(servicedoc);
+  }catch (e){
+    console.log(e);
+  }
+  
+}
+
 const addToDB = async () => {
-    const q = query(collection(db, "workers"), where("email", "==", user?.email));
+    const q = query(collection(db, "workers"), where("workerEmail", "==", user?.email));
     const data = await getDocs(q);
     console.log(data);
     const userCollectionRef = collection(db, "workers");
@@ -73,6 +133,42 @@ const addToDB = async () => {
            <input type = "submit"></input>
          </form>
          </center>
+         <ServicesContainer id="services">
+          <ServicesWrapper>
+              
+                  {/* <ServicesIcon src={Icon1}/> */}
+                  {/* <ServicesH2>Elder Care</ServicesH2>
+                  <ServicesP>There are many different services that can minimize<br/>
+                             caregiver burden, extend a senior's independence, improve<br/>
+                             their safety and help them successfully age in place.<br/>
+                             Our Services include personal hygiene, cleaning, <br/> */}
+                             {/* grocery shopping, and managing medications.</ServicesP>
+                             
+                      */}
+                  {services.map((Service) => {
+        return(
+          <ServicesCard>
+            <br/><br/>
+            <div style = {{fontSize: '18px'}}>
+            service: {Service.service}<br/>
+            type: {Service.type}<br/>
+            expected salary/m: {Service.salary}<br/>
+            location: {Service.salary}<br/>
+             </div> 
+            <br />
+            <div>
+              <div className='row'>
+                <div className='col'>
+            <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-danger' onClick={() => deleteHandler(Service)}>Delete</button>
+            </div>
+              </div>
+            </div>
+            </ServicesCard>
+        );
+      })}
+              </ServicesWrapper>
+              </ServicesContainer>
     </div>
     
   )

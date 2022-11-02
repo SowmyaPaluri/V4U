@@ -144,12 +144,15 @@ import BookForm from "./BookForm";
 import ServiceForm from './ServiceForm';
 
 const Book = () =>{
+    
     const [user, loading] = useAuthState(auth);
     const [state, setState] = useState('');
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const email = user ? user?.email: 'undefined';
     const collectionRef = collection(db, 'users');
+    // console.log(user.auth);
+    
     useEffect(() => {
         if (loading) return;
         if (!user ) return navigate("/logupmain");

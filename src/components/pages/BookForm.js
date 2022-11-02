@@ -3,7 +3,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../firebase";
-import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot } from "firebase/firestore";
+import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot, arrayRemove } from "firebase/firestore";
+import {
+  ServicesContainer,
+  ServicesH1,
+  ServicesWrapper,
+  ServicesCard,
+  ServicesIcon,
+  ServicesH2,
+  ServicesP
+}from './BookNowElements.js';
 
 const BookForm = () => {
 
@@ -38,6 +47,39 @@ const submitHandler = (e) =>{
     console.log(temp);
     addToDB();
 }
+
+
+
+const deleteHandler = async (e) => {
+  const q = query(collection(db, "users"), where("email", "==", user?.email));
+  const data = await getDocs(q);
+  console.log(data);
+  const userCollectionRef = collection(db, "users");
+  
+
+  try{
+      // console.log(1111);
+  
+    data.forEach( async (user) => {
+      const getUser = doc(db, 'users', user.id);
+      // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
+      await updateDoc(getUser, {
+          bookedServices: arrayRemove(e)
+      });
+      // changeServices(getUser.bookedServices);
+      // console.log(bookedServices);
+      // console.log(10);
+      });
+  } catch (e) {
+    console.log("error occured");
+  }
+};
+
+
+
+
+
+
 const addToDB = async () => {
     const q = query(collection(db, "users"), where("email", "==", user?.email));
     const data = await getDocs(q);
@@ -65,6 +107,7 @@ const addToDB = async () => {
 
   return (
     <div>
+      <br/><br/>
         <center>
          <form onSubmit={submitHandler}>
            <label>the service you want:</label> 
@@ -88,6 +131,39 @@ const addToDB = async () => {
          <button onClick={logout}>
            Logout
           </button>
+          <ServicesContainer id="services">
+          <ServicesWrapper>
+              
+                  {/* <ServicesIcon src={Icon1}/> */}
+                  {/* <ServicesH2>Elder Care</ServicesH2>
+                  <ServicesP>There are many different services that can minimize<br/>
+                             caregiver burden, extend a senior's independence, improve<br/>
+                             their safety and help them successfully age in place.<br/>
+                             Our Services include personal hygiene, cleaning, <br/> */}
+                             {/* grocery shopping, and managing medications.</ServicesP>
+                             
+                      */}
+                  {temp.map((user) => {
+        return(
+          <ServicesCard>
+            <br/><br/>
+            <h4> service: {user.service}</h4>
+            <h4> type: {user.type}</h4>
+            <br />
+            <div>
+              <div className='row'>
+                <div className='col'>
+            <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
+            </div>
+              </div>
+            </div>
+            </ServicesCard>
+        );
+      })}
+              {/* </ServicesCard> */}
+              </ServicesWrapper>
+              </ServicesContainer>
         {temp.map((user) => {
         return(
           <div>
