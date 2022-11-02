@@ -10,7 +10,9 @@ import AdminLoginMain from './components/pages/ClientLoginMain';
 import ServicesShown from './components/pages/ServicesIndex';
 import Book from './components/pages/Book';
 import AddService from './components/pages/AddService';
+import Unauthorised from './components/pages/Unauthorised';
 import LogupMain from './components/pages/LogupMain';
+import Matches from './components/pages/Matches';
 //import Login from './components/pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -21,6 +23,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/clientsignupmain' element={<ClientSignupMain />} />
           <Route path='/clientloginmain' element={<ClientLoginMain />} />
           <Route path='/workersignupmain' element={<WorkerSignupMain />} />
@@ -29,7 +32,9 @@ function App() {
           <Route path='/servicesIndex' element={<ServicesShown />} />
           <Route path='/book' element={<Book />} />
           <Route path='/addservice' element={<AddService />} />
+          <Route path='/unauthorised' element={<Unauthorised />} />
           <Route path='/logupmain' element={<LogupMain />} />
+          <Route path='/matches' element={<Matches />} />
         </Routes>
       </Router>
     </>
