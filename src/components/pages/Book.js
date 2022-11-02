@@ -169,6 +169,8 @@ const Book = () =>{
         console.log(1234);
         onSnapshot(qq, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
+              console.log("hellooooo");
+              console.log(doc.data().state);
             setState(doc.data().state);
             })
         });

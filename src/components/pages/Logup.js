@@ -8,18 +8,8 @@ import worker from './Worker.jpeg';
 
 const LogUp = () => {
   return (
-    <Row>
-      <Col>
-        <a href="./ClientSignupMain"><img src = {client} height = "250" width="250" alt="client"/></a>
-      </Col>
-      <Col>
-        <a href="./AdminLoginMain"><img src = {admin} height = "250" width="250" alt='admin'/></a>
-      </Col>
-      <Col>
-        <a href="./WorkerSignupMain"><img src = {worker} height = "250" width="250" alt='worker'/></a>
-      </Col>
-    </Row>
-    /*<div style={{borderRadius:'50%', verticalAlign:'center'}}><center>
+    
+    <div style={{borderRadius:'50%', verticalAlign:'center'}}><center>
         <br/><br/><br/><br/>
         <a href="./ClientSignupMain"><img src = {client} height = "250" width="250" alt="client"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="./AdminLoginMain"><img src = {admin} height = "250" width="250" alt='admin'/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
