@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { auth, db, logout } from "../firebase";
+
+
+
+
+
+
+
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link,useNavigate } from 'react-router-dom';
+// import { useAuthState } from 'react-firebase-hooks/auth';
 import './Navbar.css';
 
 function Navbar() {
+  const [user, loading] = useAuthState(auth);
+  const authh = !(!user);
+  
+
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-
+  console.log(authh);
+  console.log(1111);
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
     let path = '/logupmain'; 
@@ -72,19 +87,39 @@ function Navbar() {
                 Add Service
               </Link>
             </li>
+            
 
-
-            <li>
-              <Link
-                to='/logupmain'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Sign up
-              </Link>
-            </li>
+            { 
+              authh ? <li><Link
+                          to='/logupmain'
+                          className='nav-links-mobile'
+                          onClick={logout}
+                        >
+                        
+                        </Link>
+                        
+                      </li>
+                      :
+                        <li>
+                          <Link
+                          to='/logupmain'
+                          className='nav-links-mobile'
+                          onClick={closeMobileMenu}
+                          >
+                          
+                          </Link>
+                          
+                        </li>
+              }
+           
           </ul>
-          {button && <Button onClick={routeChange} variant="light" size='md'>SIGN UP</Button>}
+          <ul>
+            {
+              authh ? <li>{button && <Button onClick={logout} variant="light" size='md'>LOG OUT</Button>}</li>
+                    : <li>{button && <Button onClick={routeChange} variant="light" size='md'>SIGN UP</Button>}</li>
+            }
+          </ul>
+          
         </div>
       </nav>
     </>

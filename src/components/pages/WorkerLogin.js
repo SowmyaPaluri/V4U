@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "./UserAuthContext";
 
+
 const WorkerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +17,10 @@ const WorkerLogin = () => {
     e.preventDefault();
     setError("");
     try {
+      // await signUp(email, password);
+      // const userCollectionRef = collection(db, "users");
+      // await addDoc(userCollectionRef, {email: email, password: password, state: states.client, services: {service: 'homemaker'}})
+      // navigate("/Services");
       await logIn(email, password);
       navigate("/home");
     } catch (err) {

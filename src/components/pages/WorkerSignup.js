@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "./UserAuthContext";
+import {collection, addDoc} from 'firebase/firestore';
+import { auth, db } from "../../firebase";
 
 //import Login from "./Login.js";
 import '../../App.css';
@@ -23,6 +25,8 @@ const WorkerSignup = () => {
     setError("");
     try {
       await signUp(email, password);
+      const userCollectionRef = collection(db, "workers");
+      await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0})
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -114,7 +118,7 @@ const WorkerSignup = () => {
         </Form>
       </div>
       <div className="p-4 box mt-3 text-center">
-        Already have an account? <Link to="/loginmain" >Log In</Link>
+        Already have an account? <Link to="/workerloginmain" >Log In</Link>
       </div>
     </>
   );

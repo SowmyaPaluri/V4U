@@ -9,7 +9,7 @@ import { UserAuthContextProvider } from "./UserAuthContext";
 
 function LogupMain() {
   return (
-    <Container style={{ width: "400px" }}>
+    <Container>
           <UserAuthContextProvider>
               <Logup />
           </UserAuthContextProvider>
