@@ -15,7 +15,7 @@ import {
   ServicesIcon,
   ServicesH2,
   ServicesP
-}from './BookNowElements.js';
+}from './ServiceAddedElements.js';
 
 const ServiceForm = () => {
   const routeChange = () =>{ 
@@ -111,13 +111,7 @@ const addToDB = async () => {
 
     // console.log(st);
       const userCollectionRef = collection(db, "services");
-<<<<<<< HEAD
-      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location})
-      alert("Service added succesfully");
-      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
-=======
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: st, acceptedBy: "", taken: false})
->>>>>>> dddfa76b20a73fd273bfad9744cce2a2b93bd321
       alert("added succesfully");
     } catch (e) {
       console.log("Error Occured");
@@ -126,8 +120,7 @@ const addToDB = async () => {
 
   return (
     <ServicesContainer id="services">
-    <div>
-      <br/><br/><center>
+      <center>
       <div className="containerservice">
          <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
             <h2 className="mb-3">Add Service</h2>
@@ -139,7 +132,7 @@ const addToDB = async () => {
                     as="select"
                     custom onChange={(e) => changeService( e.target.value)}>
                     <option key={'empty'} value={''}>Select Service</option>
-                    <option value="homemaker">Home Maker</option>
+                    <option value="homemaid">Home Maid</option>
                     <option value="eldercare">Elder Care</option>
                     <option value="babycare">Baby Care</option>
                     <option value="healthcare">Health Care</option>
@@ -151,8 +144,8 @@ const addToDB = async () => {
                     as="select"
                     custom onChange={(e) => changeType( e.target.value)}>
                     <option key={'empty'} value={''}>Select Service Type</option>
-                    <option value="parttime">Part Time</option>
-                    <option value="fulltime">Full Time</option>
+                    <option value="Part time">Part Time</option>
+                    <option value="Full time">Full Time</option>
                 </Form.Control>
                 
               </Form.Group>
@@ -180,7 +173,7 @@ const addToDB = async () => {
             </Form>
           </div>
           
-          </div><br></br><br></br></center>
+          </div><br/></center>
           <center>
             <div style={{width: '30%',paddingLeft: "10vw"}} className="p-4 box">
               <Button onClick={routeChange} variant="primary" type="Submit" size="lg" className="btn btn-success">
@@ -188,7 +181,6 @@ const addToDB = async () => {
               </Button>
           </div>
         </center>
-    </div>
     </ServicesContainer>
   )
 }

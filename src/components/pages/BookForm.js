@@ -122,7 +122,7 @@ const addToDB = async () => {
 };
 
   return (
-    <div>
+    <ServicesContainer>
       <br/><br/><center>
       <div className="containerservice">
          <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
@@ -177,7 +177,7 @@ const addToDB = async () => {
           </div>
         </center>
     
-    </div>
+        </ServicesContainer>
     
   )
 }

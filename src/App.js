@@ -40,8 +40,8 @@ function App() {
           <Route path='/bookedservices' element={<BookServices />} />
           <Route path='/servicesadded' element={<ServicesAdded />} />
           <Route path='/addservice' element={<AddService />} />
-          <Route path='/unauthorisedclient' element={<UnauthorisedClient />} />
-          <Route path='/unauthorisedworker' element={<UnauthorisedWorker />} />
+          <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
+          <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
           <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} />
           <Route path='/profile' element={<Profiles />} />

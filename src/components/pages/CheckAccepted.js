@@ -53,16 +53,7 @@ console.log(matchedWorkers.length)
             <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://tse3.mm.bing.net/th?id=OIP.KiY0WJzqZ5wd9vdmXidPgwHaGl&pid=Api&P=0"/></Col>
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
-                <Card.Text>
-<<<<<<< HEAD
-                  Worker Email: {S.workerEmail}<br/>
-                  Service: {S.service}<br />
-                  Type: {S.type}<br />
-                  Location: {S.location}<br />
-                  Salary: {S.salary}<br />
-                  Mobile Number: XXXXXXXXXX<br/>
-                  Your Service is accepted by {S.acceptedBy}<br />  
-=======
+                <Card.Text style={{textAlign:'center',fontSize:20}}>
                 Your Service is accepted by {S.acceptedBy.split('@')[0]}<br />
                 ClientName: {S.acceptedBy}<br />
                 Mobile Number: XXXXXXXXXX<br />
@@ -71,8 +62,6 @@ console.log(matchedWorkers.length)
                 location: {S.location}<br />
                 Salary: {S.salary}<br />
                 
-                
->>>>>>> dddfa76b20a73fd273bfad9744cce2a2b93bd321
                 </Card.Text>
               </Row>
               {/* <Row>

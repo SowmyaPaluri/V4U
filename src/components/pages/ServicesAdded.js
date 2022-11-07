@@ -10,7 +10,7 @@ import {
   ServicesH1,
   ServicesWrapper,
   ServicesCard,
-}from './BookNowElements.js';
+}from './ServiceAddedElements.js';
 
 const ServicesAdded = () => {
 
@@ -74,7 +74,7 @@ const addToDB = async () => {
       
       const userCollectionRef = collection(db, "services");
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
-      alert("added succesfully");
+      alert("Details added succesfully");
     } catch (e) {
       console.log("Error Occured");
     }
@@ -89,10 +89,10 @@ const addToDB = async () => {
           <ServicesCard>
             <br/><br/>
             <div style = {{fontSize: '20px'}}>
-            Service:    {Service.service}<br/>
-            Type:   {Service.type}<br/>
-            Expected Salary per month:    {Service.salary}<br/>
-            Location:   {Service.location}<br/>
+            Service:  {Service.service}<br/>
+            Type: {Service.type}<br/>
+            Expected Salary per month:  {Service.salary}<br/>
+            Location: {Service.location}<br/>
              </div> 
             <br />
             <div>
