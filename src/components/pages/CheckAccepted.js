@@ -54,13 +54,13 @@ console.log(matchedWorkers.length)
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
-                  WorkerEmail: {S.workerEmail}<br/>
-                service: {S.service}<br />
-                 type: {S.type}<br />
-                location: {S.location}<br />
-                Salary: {S.salary}<br />
-                Your Service is accepted by {S.acceptedBy}<br />
-                Mobile Number: XXXXXXXXXX
+                  Worker Email: {S.workerEmail}<br/>
+                  Service: {S.service}<br />
+                  Type: {S.type}<br />
+                  Location: {S.location}<br />
+                  Salary: {S.salary}<br />
+                  Mobile Number: XXXXXXXXXX<br/>
+                  Your Service is accepted by {S.acceptedBy}<br />  
                 </Card.Text>
               </Row>
               {/* <Row>

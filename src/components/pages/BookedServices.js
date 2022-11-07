@@ -64,18 +64,12 @@ const deleteHandler = async (e) => {
   const userCollectionRef = collection(db, "users");
   
 
-  try{
-      // console.log(1111);
-  
+  try{  
     data.forEach( async (user) => {
       const getUser = doc(db, 'users', user.id);
-      // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
       await updateDoc(getUser, {
           bookedServices: arrayRemove(e)
       });
-      // changeServices(getUser.bookedServices);
-      // console.log(bookedServices);
-      // console.log(10);
       });
   } catch (e) {
     console.log("error occured");
@@ -83,11 +77,8 @@ const deleteHandler = async (e) => {
 };
 
 const check = (u) =>{
-  // console.logs
   var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
-  // console.log(url)
   navigate(url);
-  // < Check />
 }
 
 
@@ -101,17 +92,12 @@ const addToDB = async () => {
     
 
     try{
-        // console.log(1111);
     
       data.forEach( async (user) => {
         const getUser = doc(db, 'users', user.id);
-        // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
         await updateDoc(getUser, {
             bookedServices: arrayUnion({service: service, type: type, location: location})
         });
-        // changeServices(getUser.bookedServices);
-        // console.log(bookedServices);
-        // console.log(10);
         });
     } catch (e) {
       console.log("error occured");
@@ -123,27 +109,17 @@ const addToDB = async () => {
       <br></br>
           <ServicesContainer id="services">
           <ServicesWrapper>
-              
-                  {/* <ServicesIcon src={Icon1}/> */}
-                  {/* <ServicesH2>Elder Care</ServicesH2>
-                  <ServicesP>There are many different services that can minimize<br/>
-                             caregiver burden, extend a senior's independence, improve<br/>
-                             their safety and help them successfully age in place.<br/>
-                             Our Services include personal hygiene, cleaning, <br/> */}
-                             {/* grocery shopping, and managing medications.</ServicesP>
-                             
-                      */}
                   {temp.map((user) => {
         return(
           <ServicesCard>
             <br/><br/>
-            <h4> service: {user.service}</h4>
-            <h4> type: {user.type}</h4>
+            <h4> Service: {user.service}</h4>
+            <h4> Type: {user.type}</h4>
             <br />
             <div>
               <div className='row'>
                 <div className='col'>
-            <button className='btn btn-success' onClick={() => check(user)}>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-success' onClick={() => check(user)}>Check </button> &nbsp;&nbsp;&nbsp;&nbsp;
             <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
             </div>
               </div>

@@ -4,7 +4,7 @@ import {collection, query, where, onSnapshot} from 'firebase/firestore';
 import { auth, db, logout } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import Unauthorised from './Unauthorised';
+import UnauthorisedWorker from './UnauthorisedWorker';
 import BookForm from "./BookForm";
 import ServiceForm from './ServiceForm';
 
@@ -40,40 +40,11 @@ const Book = () =>{
             })
         });
       }, [user, loading]);
-    
-    
-//     useEffect(() => {
-        
-//         const getUsers = async () => {
-//         const data = await getDocs(q);
-//         setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-//         // setType(users[0].state)
-//       };
-//       getUsers(); 
-//   }, []);
 console.log(state);
-// useEffect(() => {
-    // const getUsers = async () => {
-    // const data = await getDocs(q);
-    // setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-    // const q = query(collectionRef, where('email', '==', email));
-//   };
-//   getUsers(); 
-  
-//   console.log(1234);
-//   onSnapshot(q, (querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//       console.log(doc.data());
-//     });
-//   });
-
-// }, []);
-    // setState(users[0].state);
-    // console.log(state);
  
     return(
         <div>
-            {state == 2002 && <Unauthorised />}
+            {state == 2002 && <UnauthorisedWorker />}
             {state == 2001 && <BookForm />}
             {/* <h1>ADD</h1> */}
         </div>

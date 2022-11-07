@@ -107,28 +107,13 @@ const addToDB = async () => {
       alert("Service added succesfully");
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
       alert("added succesfully");
-      // data.forEach( async (worker) => {
-      //   const getWorker = doc(db, 'workers', worker.id);
-      //   // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
-      //   await updateDoc(getWorker, {
-      //       Services: arrayUnion({service: service, type: type, salary: salary})
-      //   });
-      //   });
-        // console.log(getWorker);
-        // console.log(9999)
-        // await updateDoc(getWorker, {
-        // service: service,
-        // type: type
-        // });
-        // getWorker.child('services').ref.push({name: 'nikhitha'});
-    // firebase.database().ref('workers/'.concat(worker.id).concat('services')).push({name: 'nikitha'})
-    //   });
     } catch (e) {
-      console.log("error occured");
+      console.log("Error Occured");
     }
 };
 
   return (
+    <ServicesContainer id="services">
     <div>
       <br/><br/><center>
       <div className="containerservice">
@@ -191,9 +176,8 @@ const addToDB = async () => {
               </Button>
           </div>
         </center>
-    
     </div>
-    
+    </ServicesContainer>
   )
 }
 

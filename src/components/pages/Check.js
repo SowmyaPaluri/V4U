@@ -147,11 +147,11 @@ disable(e, active);
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
-                  WorkerEmail: {S.workerEmail}<br/>
-                service: {S.service}<br />
-                 type: {S.type}<br />
-                location: {S.location}<br />
-                Salary: {S.salary}<br />
+                  WorkerEmail:  {S.workerEmail}<br/>
+                  Service: {S.service}<br />
+                  Type: {S.type}<br />
+                  Location: {S.location}<br />
+                  Salary: {S.salary}<br />
                 </Card.Text>
               </Row>
               <Row>
@@ -180,10 +180,10 @@ disable(e, active);
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
                   WorkerEmail: {S.workerEmail}<br/>
-                service: {S.service}<br />
-                 type: {S.type}<br />
-                location: {S.location}<br />
-                Salary: {S.salary}<br />
+                  Service: {S.service}<br />
+                  Type: {S.type}<br />
+                  Location: {S.location}<br />
+                  Salary: {S.salary}<br />
                 </Card.Text>
               </Row>
               <Row>
