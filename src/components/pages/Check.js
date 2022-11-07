@@ -59,18 +59,18 @@ const Check = () => {
     // await updateDoc(serviceDoc, {});
     console.log("cccccc");
   }
-  const changeActive = async (id, state) =>{
+  const changeActive = async (id, st) =>{
     const matchedDoc = doc(db, 'workers', id)
-    await updateDoc(matchedDoc, {active: state})
+    await updateDoc(matchedDoc, {active: st})
   }
 
-  const changeActiveServices = async (id, state) =>{
+  const changeActiveServices = async (id, st) =>{
     const matchedDoc = doc(db, 'services', id)
-    await updateDoc(matchedDoc, {active: state})
+    await updateDoc(matchedDoc, {active: st})
   }
 
   const disable = async (email, state) => {
-    console.log("disabled")
+    
     const workersRef = collection(db, 'workers')
     const qw = query(workersRef, where('email', '==', email));
     onSnapshot(qw, (querySnapshot) => {
@@ -85,12 +85,12 @@ const Check = () => {
         changeActiveServices(doc.id, state);
       })
   });
-
+  console.log("disabled")
   }
 
-  const assign = async (e, em, taken, d) => {
+  const assign = async (e, em, taken, d, active) => {
     // var a = []
-    
+    console.log(active);
     const usersRef = collection(db, 'users');
     const servicesRef = collection(db, 'services')
     const qu = query(usersRef, where('email', '==', email));
@@ -130,7 +130,7 @@ else{
 });
 }
 changeService(em, taken);
-disable(e, !taken);
+disable(e, active);
 }
 
   return (
@@ -156,7 +156,7 @@ disable(e, !taken);
               </Row>
               <Row>
                 <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true)}>Decline</Button>{' '}
+                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true)}>Decline</Button>{' '}
                 </div>
               </Row>
 
@@ -188,8 +188,8 @@ disable(e, !taken);
               </Row>
               <Row>
                 <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="success" size="lg" onClick={() => assign(S.workerEmail, user?.email, true, false)}>Accept</Button>{' '}
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, false)}>Decline</Button>{' '}
+                    <Button variant="success" size="lg" onClick={() => assign(S.workerEmail, user?.email, true, false, false)}>Accept</Button>{' '}
+                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, false, true)}>Decline</Button>{' '}
                 </div>
               </Row>
 
