@@ -37,25 +37,25 @@ const collectionRef = collection(db, 'services');
   }, [user, loading]);
   console.log(services);
 
-// const [users, setUsers] = useState([]);
-// const userCollectionRef = collection(db, "users");
-// useEffect(() => {
-//   if (loading) return;
-//   if (!user ) return navigate("/logupmain");
-//   const collectionRef = collection(db, 'services');
-//   const q = query(collectionRef, where('workerEmail', '==', user?.email));
-//   console.log(1234);
-//   onSnapshot(q, (querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         // console.log(doc.data().bookedServices);
-//         setServices(doc.data());
-//         console.log(doc.data().workerEmail);
-//       // changeServices(temp);
-//       })
-//       // console.log(temp);
-//   });
-//   console.log(services);
-// }, [user, loading]);
+const [users, setUsers] = useState([]);
+const userCollectionRef = collection(db, "users");
+useEffect(() => {
+  if (loading) return;
+  if (!user ) return navigate("/logupmain");
+  const collectionRef = collection(db, 'services');
+  const q = query(collectionRef, where('workerEmail', '==', user?.email));
+  console.log(1234);
+  onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.data().bookedServices);
+        setServices(doc.data());
+        console.log(doc.data().workerEmail);
+      // changeServices(temp);
+      })
+      // console.log(temp);
+  });
+  console.log(services);
+}, [user, loading]);
 
 
 function refresh(){
@@ -87,23 +87,7 @@ const addToDB = async () => {
       
       const userCollectionRef = collection(db, "services");
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location})
-      alert("added succesfully");
-      // data.forEach( async (worker) => {
-      //   const getWorker = doc(db, 'workers', worker.id);
-      //   // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
-      //   await updateDoc(getWorker, {
-      //       Services: arrayUnion({service: service, type: type, salary: salary})
-      //   });
-      //   });
-        // console.log(getWorker);
-        // console.log(9999)
-        // await updateDoc(getWorker, {
-        // service: service,
-        // type: type
-        // });
-        // getWorker.child('services').ref.push({name: 'nikhitha'});
-    // firebase.database().ref('workers/'.concat(worker.id).concat('services')).push({name: 'nikitha'})
-    //   });
+      alert("Service added succesfully");
     } catch (e) {
       console.log("error occured");
     }
@@ -113,18 +97,18 @@ const addToDB = async () => {
     <div>
         <center>
          <form onSubmit={submitHandler}>
-           <label>the service you want:</label> 
+           <label>The service you want to work for:</label> 
            <select onChange={(e) => setService(e.target.value)}>
              <option>select</option>
-             <option>HomeMakers</option>
-             <option>Cooks</option>
-             <option>Gardeners</option>
-             <option>Nurses</option>
+             <option>Elder Care</option>
+             <option>Baby Care</option>
+             <option>Health Care</option>
+             <option>Home Maid</option>
            </select><br />
            <label>choose the type:</label>
            <select onChange={(e) => setType(e.target.value)}>
-             <option>partTime</option>
-             <option>fullTime</option>
+             <option>Part Time</option>
+             <option>Full Time</option>
            </select><br />
            <label>Expected Salary per month:</label>
            <input type = "text" onChange={(e) => setSalary(e.target.value)}></input><br />
@@ -135,16 +119,6 @@ const addToDB = async () => {
          </center>
          <ServicesContainer id="services">
           <ServicesWrapper>
-              
-                  {/* <ServicesIcon src={Icon1}/> */}
-                  {/* <ServicesH2>Elder Care</ServicesH2>
-                  <ServicesP>There are many different services that can minimize<br/>
-                             caregiver burden, extend a senior's independence, improve<br/>
-                             their safety and help them successfully age in place.<br/>
-                             Our Services include personal hygiene, cleaning, <br/> */}
-                             {/* grocery shopping, and managing medications.</ServicesP>
-                             
-                      */}
                   {services.map((Service) => {
         return(
           <ServicesCard>
