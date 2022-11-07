@@ -34,3 +34,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.containerservice{
+    display: flex;
+    width: 90%;
+    justify-content:center
+    
+}

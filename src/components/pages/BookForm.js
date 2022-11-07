@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Alert } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
@@ -17,8 +19,11 @@ import {
 
 const BookForm = () => {
 
-const [service, setService] = useState('');
-const [type, setType] = useState('');
+//const [service, setService] = useState('');
+const [service, changeService] = useState();
+const [type, changeType] = useState('');
+const [ change ] = useState("");
+//const [type, setType] = useState('');
 const [location, setLocation] = useState('');
 const [user, loading, error] = useAuthState(auth);
 const navigate = useNavigate();
@@ -115,29 +120,51 @@ const addToDB = async () => {
   return (
     <div>
       <br/><br/>
-        <center>
-         <form onSubmit={submitHandler}>
-           <label>the service you want:</label> 
-           <select onChange={(e) => setService(e.target.value)}>
-             <option>select</option>
-             <option>HomeMakers</option>
-             <option>Cooks</option>
-             <option>Gardeners</option>
-             <option>Nurses</option>
-           </select><br />
-           <label>choose the type:</label>
-           <select onChange={(e) => setType(e.target.value)}>
-             <option>partTime</option>
-             <option>fullTime</option>
-           </select><br />
-           <label>Enter your Location:</label>
-           <input type = "text" onChange={(e) => setLocation(e.target.value)}></input><br />
-           <input type = "submit"></input>
-         </form>
-         </center>
-         <button onClick={logout}>
-           Logout
-          </button>
+      <div className="containerservice">
+         <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
+            <h2 className="mb-3">Select Service</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={submitHandler}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control 
+                    required
+                    as="select"
+                    custom onChange={(e) => changeService( e.target.value)}>
+                    <option key={'empty'} value={''}>Select Service</option>
+                    <option value="homemaker">Home Maker</option>
+                    <option value="eldercare">Elder Care</option>
+                    <option value="babycare">Baby Care</option>
+                    <option value="healthcare">Health Care</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control 
+                    required
+                    as="select"
+                    custom onChange={(e) => changeType( e.target.value)}>
+                    <option key={'empty'} value={''}>Select Service Type</option>
+                    <option value="parttime">Part Time</option>
+                    <option value="fulltime">Full Time</option>
+                </Form.Control>
+                
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCity">
+                <Form.Control
+                    required
+                    type="text"
+                    placeholder="City"
+                    onChange={(e) => change( e.target.value)}
+                />
+              </Form.Group>
+              <div className="d-grid gap-2">
+                <Button variant="primary" type="Submit">
+                  Book Service
+                </Button>
+              </div>
+            </Form>
+          </div>
+          
+          </div><br></br>
           <ServicesContainer id="services">
           <ServicesWrapper>
               
@@ -174,8 +201,7 @@ const addToDB = async () => {
         {temp.map((user) => {
         return(
           <div>
-            <h1> service: {user.service}</h1>
-            <h1> type: {user.type}</h1>
+            
           </div>
         );
       })}
