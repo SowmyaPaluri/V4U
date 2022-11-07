@@ -1,8 +1,8 @@
 import React from 'react'
 
-const NoMatches = () => {
+const NoMatches = (props) => {
   return (
-    <div> <h1>No matches found</h1> </div>
+    <div> <h1>{props.text}</h1> </div>
   )
 }
 

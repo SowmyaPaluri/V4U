@@ -54,13 +54,15 @@ console.log(matchedWorkers.length)
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
-                  WorkerEmail: {S.workerEmail}<br/>
+                Your Service is accepted by {S.acceptedBy.split('@')[0]}<br />
+                ClientName: {S.acceptedBy}<br />
+                Mobile Number: XXXXXXXXXX<br />
                 service: {S.service}<br />
                  type: {S.type}<br />
                 location: {S.location}<br />
                 Salary: {S.salary}<br />
-                Your Service is accepted by {S.acceptedBy}<br />
-                Mobile Number: XXXXXXXXXX
+                
+                
                 </Card.Text>
               </Row>
               {/* <Row>

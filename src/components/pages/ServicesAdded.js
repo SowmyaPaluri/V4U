@@ -28,10 +28,11 @@ const [user, loading, error] = useAuthState(auth);
 //const [service, changeService] = useState();
 //const [type, changeType] = useState('');
 const navigate = useNavigate();
+const email = user?.email;
 const [services, setServices] = useState([]);
 const collectionRef = collection(db, 'services');
 
-  const q = query(collectionRef, where('workerEmail', '==', user?.email));
+  const q = query(collectionRef, where('workerEmail', '==', email));
   useEffect(() => {
     if(loading) return;
     if (!user) return navigate("/logupmain");

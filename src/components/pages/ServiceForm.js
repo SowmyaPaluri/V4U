@@ -28,6 +28,7 @@ const [type, changeType] = useState('');
 const [salary, changeSalary] = useState('');
 const [location, changeLocation] = useState('');
 const [ change ] = useState("");
+const [st, changest] = useState(true);
 const [user, loading, error] = useAuthState(auth);
 //const [service, changeService] = useState();
 //const [type, changeType] = useState('');
@@ -41,7 +42,14 @@ const collectionRef = collection(db, 'services');
     if (!user) return navigate("/logupmain");
     const getUsers = async () => {
     const data = await getDocs(q);
-    setServices(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    setServices(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    const qu = query(collection(db, "workers"), where("email", "==", user?.email));
+    onSnapshot(qu, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data().active);
+        changest(doc.data().active);
+      })
+  });
   };
   getUsers(); 
   }, [user, loading]);
@@ -95,15 +103,15 @@ const check = (u) => {
 }
 
 const addToDB = async () => {
-    const q = query(collection(db, "workers"), where("workerEmail", "==", user?.email));
+    const q = query(collection(db, "workers"), where("email", "==", user?.email));
     const data = await getDocs(q);
     console.log(data);
     const userCollectionRef = collection(db, "workers");
-
     try{
-      
+
+    // console.log(st);
       const userCollectionRef = collection(db, "services");
-      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
+      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: st, acceptedBy: "", taken: false})
       alert("added succesfully");
       // data.forEach( async (worker) => {
       //   const getWorker = doc(db, 'workers', worker.id);
@@ -175,7 +183,7 @@ const addToDB = async () => {
               </Form.Group>
               <div className="d-grid gap-2">
                 <Button variant="primary" type="Submit">
-                  Book Service
+                  Add Service
                 </Button>
               </div>
             </Form>

@@ -87,6 +87,15 @@ function Navbar() {
                 Add Service
               </Link>
             </li>
+            <li className='nav-item'>
+              <Link
+                to='/profile'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Profile
+              </Link>
+            </li>
             
 
             { 

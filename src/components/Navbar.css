@@ -28,8 +28,9 @@
   display: flex;
   align-items: center;
 }
+
 .navbar-logo:hover {
-  color:#fff;
+  color: #fff;
 }
 
 .fa-typo3 {
@@ -39,7 +40,7 @@
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -62,7 +63,7 @@
 }
 
 .nav-links:hover {
-  color:#fff;
+  color: #fff;
   border-bottom: 4px solid #fff;
   transition: all 0.2s ease-out;
 }
@@ -74,6 +75,7 @@
 .nav-links-mobile {
   display: none;
 }
+
 .menu-icon {
   display: none;
 }
