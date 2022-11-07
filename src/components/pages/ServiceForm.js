@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
+// import { uid } from "uid";
 import { auth, db, logout } from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot , sizeInc, deleteDoc} from "firebase/firestore";
 import {
@@ -66,6 +67,7 @@ function refresh(){
 const submitHandler = (e) =>{
     e.preventDefault();
     addToDB();
+    alert()
 }
 const deleteHandler = async (e) => {
   const servicedoc = doc(db, "services", e.id);
@@ -77,6 +79,12 @@ const deleteHandler = async (e) => {
   
 }
 
+const check = (u) => {
+  var url = "/checkaccepted" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+  // console.log(url)
+  navigate(url);
+}
+
 const addToDB = async () => {
     const q = query(collection(db, "workers"), where("workerEmail", "==", user?.email));
     const data = await getDocs(q);
@@ -86,7 +94,7 @@ const addToDB = async () => {
     try{
       
       const userCollectionRef = collection(db, "services");
-      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location})
+      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
       alert("added succesfully");
       // data.forEach( async (worker) => {
       //   const getWorker = doc(db, 'workers', worker.id);
@@ -153,13 +161,13 @@ const addToDB = async () => {
             service: {Service.service}<br/>
             type: {Service.type}<br/>
             expected salary/m: {Service.salary}<br/>
-            location: {Service.salary}<br/>
+            location: {Service.location}<br/>
              </div> 
             <br />
             <div>
               <div className='row'>
                 <div className='col'>
-            <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-success' onClick={() => check(Service)}>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
             <button className='btn btn-danger' onClick={() => deleteHandler(Service)}>Delete</button>
             </div>
               </div>

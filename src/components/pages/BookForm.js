@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../firebase";
+import Check from './Check';
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot, arrayRemove } from "firebase/firestore";
 import {
   ServicesContainer,
@@ -25,7 +26,7 @@ const [BookedServices, changeServices] = useState([]);
 const [temp, setTemp] = useState([]);
 const booked = [];
 // const admin = require("firebase-admin");
-
+console.log(user?.email)
 useEffect(() => {
   if (loading) return;
   if (!user ) return navigate("/logupmain");
@@ -77,7 +78,13 @@ const deleteHandler = async (e) => {
 
 
 
-
+const check = (u) =>{
+  // console.logs
+  var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+  // console.log(url)
+  navigate(url);
+  // < Check />
+}
 
 
 const addToDB = async () => {
@@ -94,7 +101,7 @@ const addToDB = async () => {
         const getUser = doc(db, 'users', user.id);
         // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
         await updateDoc(getUser, {
-            bookedServices: arrayUnion({service: service, type: type, location: location})
+            bookedServices: arrayUnion({service: service, type: type, location: location, assignedTo: "", taken: false})
         });
         // changeServices(getUser.bookedServices);
         // console.log(bookedServices);
@@ -153,7 +160,7 @@ const addToDB = async () => {
             <div>
               <div className='row'>
                 <div className='col'>
-            <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-success' onClick={() => check(user)}>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
             <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
             </div>
               </div>
@@ -172,6 +179,7 @@ const addToDB = async () => {
           </div>
         );
       })}
+    
     </div>
     
   )
