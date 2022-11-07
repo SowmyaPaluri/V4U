@@ -17,11 +17,7 @@ import {
   ServicesP
 }from './BookNowElements.js';
 
-const ServiceForm = () => {
-  const routeChange = () =>{ 
-    let path = '/servicesadded'; 
-    navigate(path);
-  }
+const ServicesAdded = () => {
 
 const [service, changeService] = useState('');
 const [type, changeType] = useState('');
@@ -127,72 +123,83 @@ const addToDB = async () => {
 };
 
   return (
-    <div>
-      <br/><br/><center>
-      <div className="containerservice">
-         <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
-            <h2 className="mb-3">Add Service</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={submitHandler}>
-              <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Control 
-                    required
-                    as="select"
-                    custom onChange={(e) => changeService( e.target.value)}>
-                    <option key={'empty'} value={''}>Select Service</option>
-                    <option value="homemaker">Home Maker</option>
-                    <option value="eldercare">Elder Care</option>
-                    <option value="babycare">Baby Care</option>
-                    <option value="healthcare">Health Care</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Control 
-                    required
-                    as="select"
-                    custom onChange={(e) => changeType( e.target.value)}>
-                    <option key={'empty'} value={''}>Select Service Type</option>
-                    <option value="parttime">Part Time</option>
-                    <option value="fulltime">Full Time</option>
-                </Form.Control>
-                
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicCity">
-                <Form.Control
-                    required
-                    type="text"
-                    placeholder="Salary"
-                    onChange={(e) => changeSalary( e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicCity">
-                <Form.Control
-                    required
-                    type="text"
-                    placeholder="City"
-                    onChange={(e) => changeLocation( e.target.value)}
-                />
-              </Form.Group>
-              <div className="d-grid gap-2">
-                <Button variant="primary" type="Submit">
-                  Book Service
-                </Button>
-              </div>
-            </Form>
-          </div>
           
-          </div><br></br><br></br></center>
-          <center>
-            <div style={{width: '30%',paddingLeft: "10vw"}} className="p-4 box">
-              <Button onClick={routeChange} variant="primary" type="Submit" size="lg" className="btn btn-success">
-                Check Your Service
-              </Button>
-          </div>
-        </center>
-    
+          <div><br></br>
+          <ServicesContainer id="services">
+          <ServicesWrapper>
+              
+                  {/* <ServicesIcon src={Icon1}/> */}
+                  {/* <ServicesH2>Elder Care</ServicesH2>
+                  <ServicesP>There are many different services that can minimize<br/>
+                             caregiver burden, extend a senior's independence, improve<br/>
+                             their safety and help them successfully age in place.<br/>
+                             Our Services include personal hygiene, cleaning, <br/> */}
+                             {/* grocery shopping, and managing medications.</ServicesP>
+                             
+                      */}
+                  {services.map((Service) => {
+    // <div>
+    //     <center>
+    //      <form onSubmit={submitHandler}>
+    //        <label>the service you want:</label> 
+    //        <select onChange={(e) => setService(e.target.value)}>
+    //          <option>select</option>
+    //          <option>HomeMakers</option>
+    //          <option>Elder Care</option>
+    //          <option>Gardeners</option>
+    //          <option>Nurses</option>
+    //        </select><br />
+    //        <label>choose the type:</label>
+    //        <select onChange={(e) => setType(e.target.value)}>
+    //          <option>partTime</option>
+    //          <option>fullTime</option>
+    //        </select><br />
+    //        <label>Expected Salary per month:</label>
+    //        <input type = "text" onChange={(e) => setSalary(e.target.value)}></input><br />
+    //        <label>Location:</label>
+    //        <input type = "text" onChange={(e) => setLocation(e.target.value)}></input><br />
+    //        <input type = "submit"></input>
+    //      </form>
+    //      </center>
+    //      <ServicesContainer id="services">
+    //       <ServicesWrapper>
+              
+    //               {/* <ServicesIcon src={Icon1}/> */}
+    //               {/* <ServicesH2>Elder Care</ServicesH2>
+    //               <ServicesP>There are many different services that can minimize<br/>
+    //                          caregiver burden, extend a senior's independence, improve<br/>
+    //                          their safety and help them successfully age in place.<br/>
+    //                          Our Services include personal hygiene, cleaning, <br/> */}
+    //                          {/* grocery shopping, and managing medications.</ServicesP>
+                             
+    //                   */}
+    //               {services.map((Service) => {
+        return(
+          <ServicesCard>
+            <br/><br/>
+            <div style = {{fontSize: '18px'}}>
+            service: {Service.service}<br/>
+            type: {Service.type}<br/>
+            expected salary/m: {Service.salary}<br/>
+            location: {Service.location}<br/>
+             </div> 
+            <br />
+            <div>
+              <div className='row'>
+                <div className='col'>
+            <button className='btn btn-success' onClick={() => check(Service)}>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-danger' onClick={() => deleteHandler(Service)}>Delete</button>
+            </div>
+              </div>
+            </div>
+            </ServicesCard>
+        );
+      })}
+              </ServicesWrapper>
+              </ServicesContainer>
     </div>
     
   )
 }
 
-export default ServiceForm;
+export default ServicesAdded;
