@@ -15,8 +15,9 @@ const WorkerSignup = () => {
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [ name, setName ] = useState("");
-  const [ setPhone ] = useState("");
-  const [ setCity ] = useState("");
+  const [ phone, setPhone ] = useState("");
+  const [ city, setCity ] = useState("");
+  const [age, setAge] = useState("");
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const WorkerSignup = () => {
     try {
       await signUp(email, password);
       const userCollectionRef = collection(db, "workers");
-      await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0})
+      await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0, name: name, phone: phone, location: city, age: age})
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -89,6 +90,13 @@ const WorkerSignup = () => {
               type="phone"
               placeholder="Phone Number"
               onChange={(e) => setPhone(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCity">
+            <Form.Control
+              type="text"
+              placeholder="Age"
+              onChange={(e) => setAge(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCity">

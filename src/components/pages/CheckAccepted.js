@@ -54,6 +54,7 @@ console.log(matchedWorkers.length)
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
+<<<<<<< HEAD
                   Worker Email: {S.workerEmail}<br/>
                   Service: {S.service}<br />
                   Type: {S.type}<br />
@@ -61,6 +62,17 @@ console.log(matchedWorkers.length)
                   Salary: {S.salary}<br />
                   Mobile Number: XXXXXXXXXX<br/>
                   Your Service is accepted by {S.acceptedBy}<br />  
+=======
+                Your Service is accepted by {S.acceptedBy.split('@')[0]}<br />
+                ClientName: {S.acceptedBy}<br />
+                Mobile Number: XXXXXXXXXX<br />
+                service: {S.service}<br />
+                 type: {S.type}<br />
+                location: {S.location}<br />
+                Salary: {S.salary}<br />
+                
+                
+>>>>>>> dddfa76b20a73fd273bfad9744cce2a2b93bd321
                 </Card.Text>
               </Row>
               {/* <Row>

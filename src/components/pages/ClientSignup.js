@@ -14,9 +14,9 @@ const ClientSignup = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const [ setName ] = useState("");
-  const [ setPhone ] = useState("");
-  const [ setCity ] = useState("");
+  const [name, setName ] = useState("");
+  const [ phone, setPhone ] = useState("");
+  const [ city, setCity ] = useState("");
   const { signUp } = useUserAuth();
 
   let navigate = useNavigate();
@@ -27,7 +27,7 @@ const ClientSignup = () => {
     try {
       await signUp(email, password);
       const userCollectionRef = collection(db, "users");
-      await addDoc(userCollectionRef, {email: email, state: 2001, bookedServices: []})
+      await addDoc(userCollectionRef, {email: email, state: 2001, bookedServices: [], name: name, phone: phone, location: city})
       navigate("/");
     } catch (err) {
       setError(err.message);

@@ -17,7 +17,8 @@ import LogupMain from './components/pages/LogupMain';
 import Matches from './components/pages/Matches';
 import Check from './components/pages/Check';
 import CheckAccepted from './components/pages/CheckAccepted';
-import ServicesAdded from './components/pages/ServicesAdded'
+import ServicesAdded from './components/pages/ServicesAdded';
+import Profiles from './components/pages/Profiles';
 //import Login from './components/pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -43,10 +44,12 @@ function App() {
           <Route path='/unauthorisedworker' element={<UnauthorisedWorker />} />
           <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} />
+          <Route path='/profile' element={<Profiles />} />
           {/* <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} /> */}
           <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
           <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
+
         </Routes>
       </Router>
     </>

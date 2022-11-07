@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot, arrayRemove, disableNetwork } from "firebase/firestore";
 import { useParams } from 'react-router-dom'
+// import { getAuth } from "firebase/auth";
 import Cards from './Cards';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -27,10 +28,12 @@ const Check = () => {
   const [array, changeArray] = useState([]);
   const [docID, changeDocID] = useState(0);
   const [ID, changeID] = useState(0);
-
+  const [size, changeSize] = useState(0);
   const collectionRef = collection(db, 'services');
+  // const auth = getAuth();
+  // const u = auth.currentUser;
   const q = query(collectionRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('taken', '==', false), where('active', '==', true));
-  const qsel = query(collectionRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('acceptedBy', '==', 'sai@gmail.com'));
+  const qsel = query(collectionRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('acceptedBy', '==', email), where('active', '==', false));
   useEffect(() => {
     if(loading) return;
     if (!user) return navigate("/logupmain");
@@ -40,6 +43,8 @@ const Check = () => {
     const d = await getDocs(qsel);
     changeSelSer(d.docs.map((doc) => ({...doc.data(), id: doc.id})))
   };
+  // console.log(u.name)s
+  changeSize(selSer.length)
   console.log(selSer);
   getUsers(); 
 
@@ -59,36 +64,51 @@ const Check = () => {
     // await updateDoc(serviceDoc, {});
     console.log("cccccc");
   }
-  const changeActive = async (id, st) =>{
+  const changeActiveT = async (id, st) =>{
     const matchedDoc = doc(db, 'workers', id)
     await updateDoc(matchedDoc, {active: true})
   }
 
-  const changeActiveServices = async (id, st) =>{
+  const changeActiveServicesT = async (id, st) =>{
     const matchedDoc = doc(db, 'services', id)
     await updateDoc(matchedDoc, {active: true})
   }
+  const changeActive = async (id, st) =>{
+    console.log("jfahsdfjhsadjhfgjasdshgkjadhsgfjkahsdgkjfhakhfakhds")
+    const matchedDoc = doc(db, 'workers', id)
+    await updateDoc(matchedDoc, {active: st})
+    console.log("active")
+  }
 
-  const disable = async (email, state) => {
-    
-    const workersRef = collection(db, 'workers')
-    const qw = query(workersRef, where('email', '==', email));
+  const changeActiveServices = async (id, st) =>{
+    const matchedDoc = doc(db, 'services', id)
+    await updateDoc(matchedDoc, {active: st})
+  }
+
+  const disable = async (email, st) => {
+    const workersRef = collection(db, 'services')
+    const qw = query(workersRef, where('workerEmail', '==', email));
     onSnapshot(qw, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        changeActive(doc.id, state);
+        changeActiveServices(doc.id, st)
       })
   });
-    const servicesRef = collection(db, 'services')
-    const qs = query(servicesRef, where('workerEmail', '==', email));
-    onSnapshot(qs, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        changeActiveServices(doc.id, state);
-      })
-  });
+  //   const servicesRef = collection(db, 'services')
+  //   const qs = query(servicesRef, where('workerEmail', '==', email), where('service', '==', service), where('type', '==', type), where('location', '==', loc));
+  //   onSnapshot(qs, (querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //       if(state == true){
+  //         changeActiveServicesT(doc.id, state);
+  //         }else{
+  //           changeActiveServicesF(doc.id, state);
+  //         }
+        
+  //     })
+  // });
   console.log("disabled")
   }
 
-  const assign = async (e, em, taken, d, active) => {
+  const assign = async (e, em, taken, d, active, wemail) => {
     // var a = []
     console.log(active);
     const usersRef = collection(db, 'users');
@@ -129,13 +149,22 @@ else{
     })
 });
 }
-changeService(em, taken);
-disable(e, active);
+changeService(em, taken, active);
+disable(wemail, active);
+console.log("0000000000000000000000000000000")
+const qw = query(collection(db, 'workers'), where('email', '==', wemail));
+    onSnapshot(qw, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          changeActive(doc.id, active);
+      })
+  });
+
 }
 
   return (
     <div>
       <h1>Selected:</h1>
+      {selSer.length == 0 && <NoMatches text = {"Not selected"}/>}
       {selSer.map((S) => {
         return(
           <>
@@ -147,16 +176,26 @@ disable(e, active);
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
+<<<<<<< HEAD
                   WorkerEmail:  {S.workerEmail}<br/>
                   Service: {S.service}<br />
                   Type: {S.type}<br />
                   Location: {S.location}<br />
                   Salary: {S.salary}<br />
+=======
+                  WorkerName: {S.workerEmail.split('@')[0]}<br/>
+                  WorkerEmail: {S.workerEmail}<br/>
+                  phone: XXXXXXXXXX<br/>
+                service: {S.service}<br />
+                 type: {S.type}<br />
+                location: {S.location}<br />
+                Salary: {S.salary}<br />
+>>>>>>> dddfa76b20a73fd273bfad9744cce2a2b93bd321
                 </Card.Text>
               </Row>
               <Row>
                 <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true)}>Decline</Button>{' '}
+                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true, S.workerEmail)}>Decline</Button>{' '}
                 </div>
               </Row>
 
@@ -168,6 +207,8 @@ disable(e, active);
           </>  
         );
       })}
+      <hr />
+      <h1>Matches</h1>
       {matchedWorkers.map((S) => {
         return(
           <>
@@ -179,17 +220,28 @@ disable(e, active);
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
+<<<<<<< HEAD
                   WorkerEmail: {S.workerEmail}<br/>
                   Service: {S.service}<br />
                   Type: {S.type}<br />
                   Location: {S.location}<br />
                   Salary: {S.salary}<br />
+=======
+                  WorkerName: {S.workerEmail.split('@')[0]}<br/>
+                service: {S.service}<br />
+                 type: {S.type}<br />
+                location: {S.location}<br />
+                Salary: {S.salary}<br />
+>>>>>>> dddfa76b20a73fd273bfad9744cce2a2b93bd321
                 </Card.Text>
               </Row>
               <Row>
                 <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="success" size="lg" onClick={() => assign(S.workerEmail, user?.email, true, false, false)}>Accept</Button>{' '}
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, false, true)}>Decline</Button>{' '}
+                  {/* {
+                  size > ? <div></div> : <div>bye</div>
+                  } */}
+                    <Button variant="success" size="lg" disabled = {size > 0} onClick={() => assign(S.workerEmail, user?.email, true, false, false, S.workerEmail)}>Accept</Button>{' '}
+                    {/* <Button variant="danger" size="lg" onClick={() => assign("", "", false, false, true, S.workerEmail)}>Decline</Button>{' '} */}
                 </div>
               </Row>
 
@@ -216,7 +268,7 @@ disable(e, active);
           </>  
         );
       })}
-      {matchedWorkers.length == 0 && <NoMatches />}
+      {matchedWorkers.length == 0 && <NoMatches text = {"No Matches Found"}/>}
     </div>
   )
 }
