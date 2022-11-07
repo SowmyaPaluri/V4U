@@ -9,6 +9,7 @@ import ClientLoginMain from './components/pages/ClientLoginMain';
 import AdminLoginMain from './components/pages/ClientLoginMain';
 import ServicesShown from './components/pages/ServicesIndex';
 import Book from './components/pages/Book';
+import BookServices from "./components/pages/BookedServices";
 import AddService from './components/pages/AddService';
 import Unauthorised from './components/pages/Unauthorised';
 import LogupMain from './components/pages/LogupMain';
@@ -31,6 +32,7 @@ function App() {
           <Route path='/adminloginmain' element={<AdminLoginMain />} />
           <Route path='/servicesIndex' element={<ServicesShown />} />
           <Route path='/book' element={<Book />} />
+          <Route path='/bookedservices' element={<BookServices />} />
           <Route path='/addservice' element={<AddService />} />
           <Route path='/unauthorised' element={<Unauthorised />} />
           <Route path='/logupmain' element={<LogupMain />} />

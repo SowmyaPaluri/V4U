@@ -17,11 +17,8 @@ import {
   ServicesP
 }from './BookNowElements.js';
 
-const BookForm = () => {
-  const routeChange = () =>{ 
-    let path = '/bookedservices'; 
-    navigate(path);
-  }
+const BookedService = () => {
+
 //const [service, setService] = useState('');
 const [service, changeService] = useState();
 const [type, changeType] = useState('');
@@ -53,12 +50,8 @@ useEffect(() => {
 
 const submitHandler = (e) =>{
     e.preventDefault();
+    console.log(temp);
     addToDB();
-    console.log(service, type);
-    alert("added successfully");
-    changeService('');
-    changeType('');
-    
 }
 
 
@@ -120,62 +113,51 @@ const addToDB = async () => {
 
   return (
     <div>
-      <br/><br/><center>
-      <div className="containerservice">
-        <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
-          <h2 className="mb-3">Select Service</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={submitHandler}>
-              <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Control 
-                    required
-                    as="select"
-                    custom onChange={(e) => changeService( e.target.value)}>
-                    <option key={'empty'} value={''}>Select Service</option>
-                    <option value="homemaker">Home Maker</option>
-                    <option value="eldercare">Elder Care</option>
-                    <option value="babycare">Baby Care</option>
-                    <option value="healthcare">Health Care</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Control 
-                    required
-                    as="select"
-                    custom onChange={(e) => changeType( e.target.value)}>
-                    <option key={'empty'} value={''}>Select Service Type</option>
-                    <option value="parttime">Part Time</option>
-                    <option value="fulltime">Full Time</option>
-                </Form.Control>
-                
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicCity">
-                <Form.Control
-                    required
-                    type="text"
-                    placeholder="City"
-                    onChange={(e) => change( e.target.value)}
-                />
-              </Form.Group>
-              <div className="d-grid gap-2">
-                <Button variant="primary" type="Submit">
-                  Book Service
-                </Button>
+      <br/><br/>
+      
+          <ServicesContainer id="services">
+          <ServicesWrapper>
+              
+                  {/* <ServicesIcon src={Icon1}/> */}
+                  {/* <ServicesH2>Elder Care</ServicesH2>
+                  <ServicesP>There are many different services that can minimize<br/>
+                             caregiver burden, extend a senior's independence, improve<br/>
+                             their safety and help them successfully age in place.<br/>
+                             Our Services include personal hygiene, cleaning, <br/> */}
+                             {/* grocery shopping, and managing medications.</ServicesP>
+                             
+                      */}
+                  {temp.map((user) => {
+        return(
+          <ServicesCard>
+            <br/><br/>
+            <h4> service: {user.service}</h4>
+            <h4> type: {user.type}</h4>
+            <br />
+            <div>
+              <div className='row'>
+                <div className='col'>
+                   <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+                   <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
+            </div>
               </div>
-            </Form>
-        </div>
-        
-      </div><br></br></center>
-      <center>
-            <div style={{width: '30%',paddingLeft: "10vw"}} className="p-4 box">
-              <Button onClick={routeChange} variant="primary" type="Submit" size="lg" className="btn btn-success">
-                Check Your Service
-              </Button>
+            </div>
+            </ServicesCard>
+        );
+      })}
+              {/* </ServicesCard> */}
+              </ServicesWrapper>
+              </ServicesContainer>
+        {temp.map((user) => {
+        return(
+          <div>
+            
           </div>
-        </center>
+        );
+      })}
     </div>
     
   )
 }
 
-export default BookForm;
+export default BookedService;
