@@ -14,7 +14,7 @@ const WorkerSignup = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const [ setName ] = useState("");
+  const [ name, setName ] = useState("");
   const [ setPhone ] = useState("");
   const [ setCity ] = useState("");
   const { signUp } = useUserAuth();

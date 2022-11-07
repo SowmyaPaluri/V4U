@@ -14,6 +14,9 @@ import AddService from './components/pages/AddService';
 import Unauthorised from './components/pages/Unauthorised';
 import LogupMain from './components/pages/LogupMain';
 import Matches from './components/pages/Matches';
+import Check from './components/pages/Check';
+import CheckAccepted from './components/pages/CheckAccepted';
+import ServicesAdded from './components/pages/ServicesAdded'
 //import Login from './components/pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -33,10 +36,15 @@ function App() {
           <Route path='/servicesIndex' element={<ServicesShown />} />
           <Route path='/book' element={<Book />} />
           <Route path='/bookedservices' element={<BookServices />} />
+          <Route path='/servicesadded' element={<ServicesAdded />} />
           <Route path='/addservice' element={<AddService />} />
           <Route path='/unauthorised' element={<Unauthorised />} />
           <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} />
+          {/* <Route path='/logupmain' element={<LogupMain />} />
+          <Route path='/matches' element={<Matches />} /> */}
+          <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
+          <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
         </Routes>
       </Router>
     </>

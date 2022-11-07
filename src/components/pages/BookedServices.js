@@ -3,6 +3,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {BookServices} from "./BookedServices";
+import Check from './Check';
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../firebase";
@@ -81,7 +82,13 @@ const deleteHandler = async (e) => {
   }
 };
 
-
+const check = (u) =>{
+  // console.logs
+  var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+  // console.log(url)
+  navigate(url);
+  // < Check />
+}
 
 
 
@@ -113,8 +120,7 @@ const addToDB = async () => {
 
   return (
     <div>
-      <br/><br/>
-      
+      <br></br>
           <ServicesContainer id="services">
           <ServicesWrapper>
               
@@ -137,8 +143,8 @@ const addToDB = async () => {
             <div>
               <div className='row'>
                 <div className='col'>
-                   <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
-                   <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
+            <button className='btn btn-success' onClick={() => check(user)}>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
             </div>
               </div>
             </div>
