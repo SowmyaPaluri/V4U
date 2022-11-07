@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
+import { Form, Alert } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+// import { uid } from "uid";
 import { auth, db, logout } from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot , sizeInc, deleteDoc} from "firebase/firestore";
 import {
@@ -15,12 +18,19 @@ import {
 }from './BookNowElements.js';
 
 const ServiceForm = () => {
+  const routeChange = () =>{ 
+    let path = '/servicesadded'; 
+    navigate(path);
+  }
 
-const [service, setService] = useState('');
-const [type, setType] = useState('');
-const [salary, setSalary] = useState('');
-const [location, setLocation] = useState('');
+const [service, changeService] = useState('');
+const [type, changeType] = useState('');
+const [salary, changeSalary] = useState('');
+const [location, changeLocation] = useState('');
+const [ change ] = useState("");
 const [user, loading, error] = useAuthState(auth);
+//const [service, changeService] = useState();
+//const [type, changeType] = useState('');
 const navigate = useNavigate();
 const [services, setServices] = useState([]);
 const collectionRef = collection(db, 'services');
@@ -66,6 +76,7 @@ function refresh(){
 const submitHandler = (e) =>{
     e.preventDefault();
     addToDB();
+    alert()
 }
 const deleteHandler = async (e) => {
   const servicedoc = doc(db, "services", e.id);
@@ -75,6 +86,12 @@ const deleteHandler = async (e) => {
     console.log(e);
   }
   
+}
+
+const check = (u) => {
+  var url = "/checkaccepted" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+  // console.log(url)
+  navigate(url);
 }
 
 const addToDB = async () => {
@@ -88,6 +105,24 @@ const addToDB = async () => {
       const userCollectionRef = collection(db, "services");
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location})
       alert("Service added succesfully");
+      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
+      alert("added succesfully");
+      // data.forEach( async (worker) => {
+      //   const getWorker = doc(db, 'workers', worker.id);
+      //   // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
+      //   await updateDoc(getWorker, {
+      //       Services: arrayUnion({service: service, type: type, salary: salary})
+      //   });
+      //   });
+        // console.log(getWorker);
+        // console.log(9999)
+        // await updateDoc(getWorker, {
+        // service: service,
+        // type: type
+        // });
+        // getWorker.child('services').ref.push({name: 'nikhitha'});
+    // firebase.database().ref('workers/'.concat(worker.id).concat('services')).push({name: 'nikitha'})
+    //   });
     } catch (e) {
       console.log("error occured");
     }
@@ -95,54 +130,68 @@ const addToDB = async () => {
 
   return (
     <div>
-        <center>
-         <form onSubmit={submitHandler}>
-           <label>The service you want to work for:</label> 
-           <select onChange={(e) => setService(e.target.value)}>
-             <option>select</option>
-             <option>Elder Care</option>
-             <option>Baby Care</option>
-             <option>Health Care</option>
-             <option>Home Maid</option>
-           </select><br />
-           <label>choose the type:</label>
-           <select onChange={(e) => setType(e.target.value)}>
-             <option>Part Time</option>
-             <option>Full Time</option>
-           </select><br />
-           <label>Expected Salary per month:</label>
-           <input type = "text" onChange={(e) => setSalary(e.target.value)}></input><br />
-           <label>Location:</label>
-           <input type = "text" onChange={(e) => setLocation(e.target.value)}></input><br />
-           <input type = "submit"></input>
-         </form>
-         </center>
-         <ServicesContainer id="services">
-          <ServicesWrapper>
-                  {services.map((Service) => {
-        return(
-          <ServicesCard>
-            <br/><br/>
-            <div style = {{fontSize: '18px'}}>
-            service: {Service.service}<br/>
-            type: {Service.type}<br/>
-            expected salary/m: {Service.salary}<br/>
-            location: {Service.salary}<br/>
-             </div> 
-            <br />
-            <div>
-              <div className='row'>
-                <div className='col'>
-            <button className='btn btn-success'>check </button> &nbsp;&nbsp;&nbsp;&nbsp;
-            <button className='btn btn-danger' onClick={() => deleteHandler(Service)}>Delete</button>
-            </div>
+      <br/><br/><center>
+      <div className="containerservice">
+         <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
+            <h2 className="mb-3">Add Service</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={submitHandler}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control 
+                    required
+                    as="select"
+                    custom onChange={(e) => changeService( e.target.value)}>
+                    <option key={'empty'} value={''}>Select Service</option>
+                    <option value="homemaker">Home Maker</option>
+                    <option value="eldercare">Elder Care</option>
+                    <option value="babycare">Baby Care</option>
+                    <option value="healthcare">Health Care</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control 
+                    required
+                    as="select"
+                    custom onChange={(e) => changeType( e.target.value)}>
+                    <option key={'empty'} value={''}>Select Service Type</option>
+                    <option value="parttime">Part Time</option>
+                    <option value="fulltime">Full Time</option>
+                </Form.Control>
+                
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCity">
+                <Form.Control
+                    required
+                    type="text"
+                    placeholder="Salary"
+                    onChange={(e) => changeSalary( e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCity">
+                <Form.Control
+                    required
+                    type="text"
+                    placeholder="City"
+                    onChange={(e) => changeLocation( e.target.value)}
+                />
+              </Form.Group>
+              <div className="d-grid gap-2">
+                <Button variant="primary" type="Submit">
+                  Book Service
+                </Button>
               </div>
-            </div>
-            </ServicesCard>
-        );
-      })}
-              </ServicesWrapper>
-              </ServicesContainer>
+            </Form>
+          </div>
+          
+          </div><br></br><br></br></center>
+          <center>
+            <div style={{width: '30%',paddingLeft: "10vw"}} className="p-4 box">
+              <Button onClick={routeChange} variant="primary" type="Submit" size="lg" className="btn btn-success">
+                Check Your Service
+              </Button>
+          </div>
+        </center>
+    
     </div>
     
   )
