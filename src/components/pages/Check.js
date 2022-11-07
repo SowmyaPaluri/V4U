@@ -61,12 +61,12 @@ const Check = () => {
   }
   const changeActive = async (id, st) =>{
     const matchedDoc = doc(db, 'workers', id)
-    await updateDoc(matchedDoc, {active: st})
+    await updateDoc(matchedDoc, {active: true})
   }
 
   const changeActiveServices = async (id, st) =>{
     const matchedDoc = doc(db, 'services', id)
-    await updateDoc(matchedDoc, {active: st})
+    await updateDoc(matchedDoc, {active: true})
   }
 
   const disable = async (email, state) => {
