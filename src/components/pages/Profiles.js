@@ -91,9 +91,17 @@ const [isToggled, setIsToggled] = useState(false);
                 <b>Email : </b>{email}<br/><br/>
             <b>Phone No. : </b>{phone}<br/><br/>
             <b>Location : </b>{loc}<br/><br/>
-            
             </h3>
-            <Switch isToggled={isToggled} onToggle={() => setIsToggled(!isToggled)}/>
+            {state == 2002 ? 
+            <div>
+            <h3><b>Disable :</b></h3>
+            
+            <React.Fragment>
+            <Switch label=" " />
+            </React.Fragment>
+            </div>
+            : <></>
+}
             
          </Box>
       </Box>
