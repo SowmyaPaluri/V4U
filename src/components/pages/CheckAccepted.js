@@ -53,7 +53,7 @@ console.log(matchedWorkers.length)
             <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://tse3.mm.bing.net/th?id=OIP.KiY0WJzqZ5wd9vdmXidPgwHaGl&pid=Api&P=0"/></Col>
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
-                <Card.Text>
+                <Card.Text style={{textAlign:'center',fontSize:20}}>
                 Your Service is accepted by {S.acceptedBy.split('@')[0]}<br />
                 ClientName: {S.acceptedBy}<br />
                 Mobile Number: XXXXXXXXXX<br />
@@ -61,7 +61,6 @@ console.log(matchedWorkers.length)
                  type: {S.type}<br />
                 location: {S.location}<br />
                 Salary: {S.salary}<br />
-                
                 
                 </Card.Text>
               </Row>

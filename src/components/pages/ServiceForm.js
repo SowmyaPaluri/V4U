@@ -15,7 +15,7 @@ import {
   ServicesIcon,
   ServicesH2,
   ServicesP
-}from './BookNowElements.js';
+}from './ServiceAddedElements.js';
 
 const ServiceForm = () => {
   const routeChange = () =>{ 
@@ -55,25 +55,25 @@ const collectionRef = collection(db, 'services');
   }, [user, loading]);
   console.log(services);
 
-// const [users, setUsers] = useState([]);
-// const userCollectionRef = collection(db, "users");
-// useEffect(() => {
-//   if (loading) return;
-//   if (!user ) return navigate("/logupmain");
-//   const collectionRef = collection(db, 'services');
-//   const q = query(collectionRef, where('workerEmail', '==', user?.email));
-//   console.log(1234);
-//   onSnapshot(q, (querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         // console.log(doc.data().bookedServices);
-//         setServices(doc.data());
-//         console.log(doc.data().workerEmail);
-//       // changeServices(temp);
-//       })
-//       // console.log(temp);
-//   });
-//   console.log(services);
-// }, [user, loading]);
+const [users, setUsers] = useState([]);
+const userCollectionRef = collection(db, "users");
+useEffect(() => {
+  if (loading) return;
+  if (!user ) return navigate("/logupmain");
+  const collectionRef = collection(db, 'services');
+  const q = query(collectionRef, where('workerEmail', '==', user?.email));
+  console.log(1234);
+  onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.data().bookedServices);
+        setServices(doc.data());
+        console.log(doc.data().workerEmail);
+      // changeServices(temp);
+      })
+      // console.log(temp);
+  });
+  console.log(services);
+}, [user, loading]);
 
 
 function refresh(){
@@ -113,30 +113,14 @@ const addToDB = async () => {
       const userCollectionRef = collection(db, "services");
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: st, acceptedBy: "", taken: false})
       alert("added succesfully");
-      // data.forEach( async (worker) => {
-      //   const getWorker = doc(db, 'workers', worker.id);
-      //   // await getWorker.update('{worker.id}/services', FieldValue.arrayUnion({name: 'nikhitha'}), {merge: true});
-      //   await updateDoc(getWorker, {
-      //       Services: arrayUnion({service: service, type: type, salary: salary})
-      //   });
-      //   });
-        // console.log(getWorker);
-        // console.log(9999)
-        // await updateDoc(getWorker, {
-        // service: service,
-        // type: type
-        // });
-        // getWorker.child('services').ref.push({name: 'nikhitha'});
-    // firebase.database().ref('workers/'.concat(worker.id).concat('services')).push({name: 'nikitha'})
-    //   });
     } catch (e) {
-      console.log("error occured");
+      console.log("Error Occured");
     }
 };
 
   return (
-    <div>
-      <br/><br/><center>
+    <ServicesContainer id="services">
+      <center>
       <div className="containerservice">
          <div style={{width: '30%',paddingLeft: "100vw",}} className="p-4 box">
             <h2 className="mb-3">Add Service</h2>
@@ -148,7 +132,7 @@ const addToDB = async () => {
                     as="select"
                     custom onChange={(e) => changeService( e.target.value)}>
                     <option key={'empty'} value={''}>Select Service</option>
-                    <option value="homemaker">Home Maker</option>
+                    <option value="homemaid">Home Maid</option>
                     <option value="eldercare">Elder Care</option>
                     <option value="babycare">Baby Care</option>
                     <option value="healthcare">Health Care</option>
@@ -160,8 +144,8 @@ const addToDB = async () => {
                     as="select"
                     custom onChange={(e) => changeType( e.target.value)}>
                     <option key={'empty'} value={''}>Select Service Type</option>
-                    <option value="parttime">Part Time</option>
-                    <option value="fulltime">Full Time</option>
+                    <option value="Part time">Part Time</option>
+                    <option value="Full time">Full Time</option>
                 </Form.Control>
                 
               </Form.Group>
@@ -189,7 +173,7 @@ const addToDB = async () => {
             </Form>
           </div>
           
-          </div><br></br><br></br></center>
+          </div><br/></center>
           <center>
             <div style={{width: '30%',paddingLeft: "10vw"}} className="p-4 box">
               <Button onClick={routeChange} variant="primary" type="Submit" size="lg" className="btn btn-success">
@@ -197,9 +181,7 @@ const addToDB = async () => {
               </Button>
           </div>
         </center>
-    
-    </div>
-    
+    </ServicesContainer>
   )
 }
 

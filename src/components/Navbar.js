@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { auth, db, logout } from "../firebase";
-
-
-
-
-
-
-
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link,useNavigate } from 'react-router-dom';
 // import { useAuthState } from 'react-firebase-hooks/auth';
@@ -62,7 +55,7 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/servicesIndex'
+                to='/ServicesIndex'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
@@ -75,7 +68,7 @@ function Navbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Book
+                Book Service
               </Link>
             </li>
             <li className='nav-item'>

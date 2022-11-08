@@ -166,11 +166,11 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
 
   return (
     <div>
-      <h1>Selected:</h1>
-      {selSer.length == 0 && <NoMatches text = {"Not selected"}/>}
+      <br/>
+      <h1>Selected Worker:</h1>
+      {selSer.length == 0 && <NoMatches text = {"No Worker was selected"}/>}
       {selSer.map((S) => {
         return(
-          <>
           <div className = "Container">
       <center>
         <Card className="card" style={{ width: '70rem', padding: 20,}} hover>
@@ -178,14 +178,14 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
             <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://cdn0.iconfinder.com/data/icons/energy-industry-1/62/worker_engineer_icon_miner_helmet_builder_workman_man_job-1024.png"/></Col>
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
-                <Card.Text>
-                  WorkerName: {S.workerEmail.split('@')[0]}<br/>
-                  WorkerEmail: {S.workerEmail}<br/>
-                  phone: XXXXXXXXXX<br/>
-                service: {S.service}<br />
-                 type: {S.type}<br />
-                location: {S.location}<br />
-                Salary: {S.salary}<br />
+                <Card.Text style={{'font-size':'50px'}}>
+                  Worker Name: {S.workerEmail.split('@')[0]}<br/>
+                  Worker Email: {S.workerEmail}<br/>
+                  Phone: XXXXXXXXXX<br/>
+                  Service: {S.service}<br />
+                  Type: {S.type}<br />
+                  Location: {S.location}<br />
+                  Salary: {S.salary}<br />
                 </Card.Text>
               </Row>
               <Row>
@@ -198,12 +198,12 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
           </Row>
         </Card>
       </center>
-    </div>
-          </>  
+    </div>  
         );
       })}
+      <br/>
       <hr />
-      <h1>Matches</h1>
+      <h1>Matched Workers:</h1>
       {matchedWorkers.map((S) => {
         return(
           <>
@@ -216,10 +216,10 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
                   WorkerName: {S.workerEmail.split('@')[0]}<br/>
-                service: {S.service}<br />
-                 type: {S.type}<br />
-                location: {S.location}<br />
-                Salary: {S.salary}<br />
+                  Service: {S.service}<br />
+                  Type: {S.type}<br />
+                  Location: {S.location}<br />
+                  Salary: {S.salary}<br />
                 </Card.Text>
               </Row>
               <Row>
@@ -255,7 +255,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
           </>  
         );
       })}
-      {matchedWorkers.length == 0 && <NoMatches text = {"No Matches Found"}/>}
+      {matchedWorkers.length == 0 && <NoMatches text = {"No Matched Workers were Found"}/>}
     </div>
   )
 }

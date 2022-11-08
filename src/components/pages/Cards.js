@@ -16,11 +16,11 @@ function Cards(props) {
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
-                  WorkerEmail: {props.workerEmail}<br/>
-                service: {props.service}<br />
-                 type: {props.type}<br />
-                location: {props.location}<br />
-                Salary: {props.salary}<br />
+                  Worker Email: {props.workerEmail}<br/>
+                  Service: {props.service}<br />
+                  Type: {props.type}<br />
+                  Location: {props.location}<br />
+                  Salary: {props.salary}<br />
                 </Card.Text>
               </Row>
               <Row>

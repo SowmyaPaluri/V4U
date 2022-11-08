@@ -11,7 +11,8 @@ import ServicesShown from './components/pages/ServicesIndex';
 import Book from './components/pages/Book';
 import BookServices from "./components/pages/BookedServices";
 import AddService from './components/pages/AddService';
-import Unauthorised from './components/pages/Unauthorised';
+import UnauthorisedClient from './components/pages/UnauthorisedClient';
+import UnauthorisedWorker from './components/pages/UnauthorisedWorker';
 import LogupMain from './components/pages/LogupMain';
 import Matches from './components/pages/Matches';
 import Check from './components/pages/Check';
@@ -39,7 +40,8 @@ function App() {
           <Route path='/bookedservices' element={<BookServices />} />
           <Route path='/servicesadded' element={<ServicesAdded />} />
           <Route path='/addservice' element={<AddService />} />
-          <Route path='/unauthorised' element={<Unauthorised />} />
+          <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
+          <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
           <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} />
           <Route path='/profile' element={<Profiles />} />
