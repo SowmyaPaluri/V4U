@@ -17,7 +17,7 @@ const AdminLogin = () => {
     setError("");
     try {
       await logIn(email, password);
-      navigate("/home");
+      navigate("/admin");
     } catch (err) {
       setError(err.message);
     }
@@ -27,7 +27,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       await googleSignIn();
-      navigate("/home");
+      navigate("/admin");
     } catch (error) {
       console.log(error.message);
     }

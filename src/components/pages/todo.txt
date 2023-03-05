@@ -1,0 +1,7 @@
+- add worker only after admin accepts him 
+- add reviews or feedback and provide star rating for the worker
+- add history in admin module
+- do 2 step verification for client
+- add disable button for worker  - completed
+- book any number of services by client
+- change the navbar according to the user 

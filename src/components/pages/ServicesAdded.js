@@ -11,7 +11,7 @@ import {
   ServicesWrapper,
   ServicesCard,
 }from './ServiceAddedElements.js';
-
+import { useParams } from 'react-router-dom'
 const ServicesAdded = () => {
 
 const [service, changeService] = useState('');
@@ -23,9 +23,9 @@ const [user, loading, error] = useAuthState(auth);
 //const [service, changeService] = useState();
 //const [type, changeType] = useState('');
 const navigate = useNavigate();
-const email = user?.email;
 const [services, setServices] = useState([]);
 const collectionRef = collection(db, 'services');
+var {email} = useParams()
 
   const q = query(collectionRef, where('workerEmail', '==', email));
   useEffect(() => {
@@ -43,15 +43,24 @@ function refresh(){
   window.location.reload(false);
 }
 
-const submitHandler = (e) =>{
-    e.preventDefault();
-    addToDB();
-    alert()
+// const submitHandler = (e) =>{
+//     e.preventDefault();
+//     addToDB();
+//     alert()
+// }
+
+const addToHistory = async (e) =>{
+  const historyCollectionRef = collection(db, "workerHistory");
+  const date = new Date();
+  await addDoc(historyCollectionRef, {worker: user?.email, type: e.type, location: e.location, service: e.service, status:"deleted", time: date, salary: e.salary});
+  console.log("added to istory");
 }
+
 const deleteHandler = async (e) => {
   const servicedoc = doc(db, "services", e.id);
   try{
     await deleteDoc(servicedoc);
+    addToHistory(e)
   }catch (e){
     console.log(e);
   }
@@ -59,26 +68,28 @@ const deleteHandler = async (e) => {
 }
 
 const check = (u) => {
-  var url = "/checkaccepted" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+  var url = "/checkaccepted" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + email;
   // console.log(url)
   navigate(url);
 }
 
-const addToDB = async () => {
-    const q = query(collection(db, "workers"), where("workerEmail", "==", user?.email));
-    const data = await getDocs(q);
-    console.log(data);
-    const userCollectionRef = collection(db, "workers");
 
-    try{
+
+// const addToDB = async () => {
+//     const q = query(collection(db, "workers"), where("workerEmail", "==", email));
+//     const data = await getDocs(q);
+//     console.log(data);
+//     const userCollectionRef = collection(db, "workers");
+
+//     try{
       
-      const userCollectionRef = collection(db, "services");
-      await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
-      alert("Details added succesfully");
-    } catch (e) {
-      console.log("Error Occured");
-    }
-};
+//       const userCollectionRef = collection(db, "services");
+//       await addDoc(userCollectionRef, {workerEmail: email, service: service, type: type, salary: salary, location: location, active: true, acceptedBy: "", taken: false})
+//       alert("Details added succesfully");
+//     } catch (e) {
+//       console.log("Error Occured");
+//     }
+// };
 
   return (
           
@@ -88,7 +99,7 @@ const addToDB = async () => {
         return(
           <ServicesCard>
             <br/><br/>
-            <div style = {{fontSize: '20px'}}>
+            <div style = {{fontSize: '16px'}}>
             Service:  {Service.service}<br/>
             Type: {Service.type}<br/>
             Expected Salary per month:  {Service.salary}<br/>

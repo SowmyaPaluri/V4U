@@ -111,7 +111,19 @@ const Check = () => {
   console.log("disabled")
   }
 
-  const assign = async (e, em, taken, d, active, wemail) => {
+  const addToHistory = async (d, key) =>{
+    const historyCollectionRef = collection(db, "bookingHistory");
+    const date = new Date();
+    if(key == true){
+    await addDoc(historyCollectionRef, {client: email, worker: d.workerEmail, type: d.type, location: d.location, service: d.service, status:"booked", time: date, salary: d.salary});
+    }
+    else{
+      await addDoc(historyCollectionRef, {client: email, worker: d.workerEmail, type: d.type, location: d.location, service: d.service, status:"declined", time: date, salary: d.salary})
+    }
+    console.log("added to istory")
+  }
+
+  const assign = async (e, em, taken, d, active, wemail, document) => {
     // var a = []
     console.log(active);
     const usersRef = collection(db, 'users');
@@ -129,8 +141,8 @@ const Check = () => {
   for(let i = 0; i < array.length; i++){
     if(array[i]["service"] == service && array[i]["location"] == loc && array[i]["type"] == type){
       array[i]["assignedTo"] = e;
-  array[i]["taken"] = taken;
-  console.log(array)
+      array[i]["taken"] = taken;
+      console.log(array)
     }
   }
   // array[0]["assignedTo"] = e;
@@ -161,6 +173,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
           changeActive(doc.id, active);
       })
   });
+addToHistory(document, taken);
 
 }
 
@@ -178,7 +191,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
             <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://cdn0.iconfinder.com/data/icons/energy-industry-1/62/worker_engineer_icon_miner_helmet_builder_workman_man_job-1024.png"/></Col>
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
-                <Card.Text style={{'font-size':'50px'}}>
+                <Card.Text>
                   Worker Name: {S.workerEmail.split('@')[0]}<br/>
                   Worker Email: {S.workerEmail}<br/>
                   Phone: XXXXXXXXXX<br/>
@@ -190,7 +203,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
               </Row>
               <Row>
                 <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true, S.workerEmail)}>Decline</Button>{' '}
+                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true, S.workerEmail, S)}>Decline</Button>{' '}
                 </div>
               </Row>
 
@@ -227,7 +240,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
                   {/* {
                   size > ? <div></div> : <div>bye</div>
                   } */}
-                    <Button variant="success" size="lg" disabled = {selSer.length != 0} onClick={() => assign(S.workerEmail, user?.email, true, false, false, S.workerEmail)}>Accept</Button>{' '}
+                    <Button variant="success" size="lg" disabled = {selSer.length != 0} onClick={() => assign(S.workerEmail, email, true, false, false, S.workerEmail, S)}>Accept</Button>{' '}
                     {/* <Button variant="danger" size="lg" onClick={() => assign("", "", false, false, true, S.workerEmail)}>Decline</Button>{' '} */}
                 </div>
               </Row>

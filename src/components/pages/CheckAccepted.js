@@ -55,7 +55,7 @@ console.log(matchedWorkers.length)
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text style={{textAlign:'center',fontSize:20}}>
                 Your Service is accepted by {S.acceptedBy.split('@')[0]}<br />
-                ClientName: {S.acceptedBy}<br />
+                ClientEmail: {S.acceptedBy}<br />
                 Mobile Number: XXXXXXXXXX<br />
                 service: {S.service}<br />
                  type: {S.type}<br />

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 // import { uid } from "uid";
-import { auth, db, logout } from "../../firebase";
+import { auth, db, logout} from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot , sizeInc, deleteDoc} from "firebase/firestore";
 import {
   ServicesContainer,
@@ -18,10 +18,7 @@ import {
 }from './ServiceAddedElements.js';
 
 const ServiceForm = () => {
-  const routeChange = () =>{ 
-    let path = '/servicesadded'; 
-    navigate(path);
-  }
+  
 
 const [service, changeService] = useState('');
 const [type, changeType] = useState('');
@@ -75,6 +72,10 @@ useEffect(() => {
   console.log(services);
 }, [user, loading]);
 
+const routeChange = () =>{ 
+  let path = '/servicesadded' + '/' + user?.email; 
+  navigate(path);
+}
 
 function refresh(){
   window.location.reload(false);
@@ -102,6 +103,13 @@ const check = (u) => {
   navigate(url);
 }
 
+const addToHistory = async () =>{
+  const historyCollectionRef = collection(db, "workerHistory");
+  const date = new Date();
+  await addDoc(historyCollectionRef, {worker: user?.email, type: type, location: location, service: service, status:"added", time: date, salary: salary});
+  console.log("added to istory");
+}
+
 const addToDB = async () => {
     const q = query(collection(db, "workers"), where("email", "==", user?.email));
     const data = await getDocs(q);
@@ -113,9 +121,11 @@ const addToDB = async () => {
       const userCollectionRef = collection(db, "services");
       await addDoc(userCollectionRef, {workerEmail: user?.email, service: service, type: type, salary: salary, location: location, active: st, acceptedBy: "", taken: false})
       alert("added succesfully");
+      addToHistory();
     } catch (e) {
       console.log("Error Occured");
     }
+    
 };
 
   return (
@@ -132,7 +142,7 @@ const addToDB = async () => {
                     as="select"
                     custom onChange={(e) => changeService( e.target.value)}>
                     <option key={'empty'} value={''}>Select Service</option>
-                    <option value="homemaid">Home Maid</option>
+                    <option value="homemaker">Home Maid</option>
                     <option value="eldercare">Elder Care</option>
                     <option value="babycare">Baby Care</option>
                     <option value="healthcare">Health Care</option>
@@ -144,8 +154,8 @@ const addToDB = async () => {
                     as="select"
                     custom onChange={(e) => changeType( e.target.value)}>
                     <option key={'empty'} value={''}>Select Service Type</option>
-                    <option value="Part time">Part Time</option>
-                    <option value="Full time">Full Time</option>
+                    <option value="parttime">Part Time</option>
+                    <option value="fulltime">Full Time</option>
                 </Form.Control>
                 
               </Form.Group>
