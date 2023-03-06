@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/pages/Home';
 import WorkerSignupMain from './components/pages/WorkerSignupMain';
 import WorkerLoginMain from './components/pages/WorkerLoginMain';
+import Worker2stepverf from './components/pages/Worker2stepverf';
 import ClientSignupMain from './components/pages/ClientSignupMain';
 import ClientLoginMain from './components/pages/ClientLoginMain';
 import AdminLoginMain from './components/pages/ClientLoginMain';
@@ -19,14 +20,17 @@ import Check from './components/pages/Check';
 import CheckAccepted from './components/pages/CheckAccepted';
 import ServicesAdded from './components/pages/ServicesAdded';
 import Profiles from './components/pages/Profiles';
+import { UserAuthContextProvider } from './components/pages/UserAuthContext';
 //import Login from './components/pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
     <>
       <Router>
         <Navbar />
+        <UserAuthContextProvider>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
@@ -34,6 +38,7 @@ function App() {
           <Route path='/clientloginmain' element={<ClientLoginMain />} />
           <Route path='/workersignupmain' element={<WorkerSignupMain />} />
           <Route path='/workerloginmain' element={<WorkerLoginMain />} />
+          <Route path='/worker2stepverf' element={<Worker2stepverf />} />
           <Route path='/adminloginmain' element={<AdminLoginMain />} />
           <Route path='/servicesIndex' element={<ServicesShown />} />
           <Route path='/book' element={<Book />} />
@@ -51,6 +56,8 @@ function App() {
           <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
 
         </Routes>
+        </UserAuthContextProvider>
+        
       </Router>
     </>
   );

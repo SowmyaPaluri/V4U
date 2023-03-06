@@ -20,6 +20,10 @@ const WorkerSignup = () => {
   const [age, setAge] = useState("");
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
+  const routeChange = () =>{ 
+    let path = '/worker2stepverf'; 
+    navigate(path);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,7 +123,7 @@ const WorkerSignup = () => {
           </Form.Group>
 
           <div className="d-grid gap-2">
-            <Button variant="primary" type="Submit">
+            <Button onClick={routeChange} variant="primary" type="Submit">
               Sign up
             </Button>
           </div>

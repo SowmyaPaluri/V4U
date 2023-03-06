@@ -4,11 +4,17 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "./UserAuthContext";
+import firebase from '../../firebase';
 
 
 const WorkerLogin = () => {
+  const routeChange = () =>{ 
+    let path = '/home'; 
+    navigate(path);
+  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ phone, setPhone ] = useState("");
   const [error, setError] = useState("");
   const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
@@ -22,7 +28,7 @@ const WorkerLogin = () => {
       // await addDoc(userCollectionRef, {email: email, password: password, state: states.client, services: {service: 'homemaker'}})
       // navigate("/Services");
       await logIn(email, password);
-      navigate("/home");
+      navigate("/worker2stepverf");
     } catch (err) {
       setError(err.message);
     }
@@ -51,7 +57,6 @@ const WorkerLogin = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control
               type="password"
@@ -61,7 +66,7 @@ const WorkerLogin = () => {
           </Form.Group>
 
           <div className="d-grid gap-2">
-            <Button variant="primary" type="Submit">
+            <Button onClick={routeChange} variant="primary" type="Submit">
               Log In
             </Button>
           </div>
@@ -74,6 +79,7 @@ const WorkerLogin = () => {
             onClick={handleGoogleSignIn}
           />
         </div>
+          
       </div>
       <div className="p-4 box mt-3 text-center">
         Don't have an account? <Link to="/signupmain">Sign up</Link>

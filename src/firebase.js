@@ -30,6 +30,8 @@
 // export {auth, db};
 
 import { initializeApp } from "firebase/app";
+
+
 import {
   GoogleAuthProvider,
   getAuth,
@@ -55,6 +57,7 @@ import {
 //   messagingSenderId: "109268452704670633494",
 //   appId: "1:894114212892:web:6db13f93ae923bf13243d9"
 // }
+// import firebase from 'firebase./app'
 const firebaseConfig = {
   apiKey: "AIzaSyCg2ptw2ZuvBu0qE9Jlq4pmxrT0HyasBvo",
   authDomain: "weforyou2-2abd5.firebaseapp.com",
@@ -64,6 +67,7 @@ const firebaseConfig = {
   appId: "1:995928750727:web:6c73915899d75258c71622",
   measurementId: "G-7THYK46YH0"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -131,3 +135,4 @@ export {
   sendPasswordReset,
   logout,
 };
+export default app;

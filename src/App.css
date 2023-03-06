@@ -40,3 +40,6 @@
     justify-content:center
     
 }
+#recaptcha-container {
+  margin: 20px;
+}
