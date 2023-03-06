@@ -17,7 +17,7 @@ import {
   ServicesH2,
   ServicesP
 }from './BookNowElements.js';
-
+import { useParams } from 'react-router-dom'
 const BookedService = () => {
 
 //const [service, setService] = useState('');
@@ -31,13 +31,13 @@ const navigate = useNavigate();
 const [BookedServices, changeServices] = useState([]);
 const [temp, setTemp] = useState([]);
 const booked = [];
-// const admin = require("firebase-admin");
+var {email} = useParams();
 
 useEffect(() => {
   if (loading) return;
   if (!user ) return navigate("/logupmain");
   const collectionRef = collection(db, 'users');
-  const q = query(collectionRef, where('email', '==', user?.email));
+  const q = query(collectionRef, where('email', '==', email));
   console.log(1234);
   onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -55,10 +55,15 @@ const submitHandler = (e) =>{
     addToDB();
 }
 
-
+const addToHistory = async (e) =>{
+  const historyCollectionRef = collection(db, "userHistory");
+  const date = new Date();
+  await addDoc(historyCollectionRef, {client: user?.email, type: e.type, location: e.location, service: e.service, status:"deleted", time: date});
+  console.log("added to istory");
+}
 
 const deleteHandler = async (e) => {
-  const q = query(collection(db, "users"), where("email", "==", user?.email));
+  const q = query(collection(db, "users"), where("email", "==", email));
   const data = await getDocs(q);
   console.log(data);
   const userCollectionRef = collection(db, "users");
@@ -71,13 +76,14 @@ const deleteHandler = async (e) => {
           bookedServices: arrayRemove(e)
       });
       });
+      addToHistory(e)
   } catch (e) {
     console.log("error occured");
   }
 };
 
 const check = (u) =>{
-  var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+  var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + email;
   navigate(url);
 }
 
@@ -85,7 +91,7 @@ const check = (u) =>{
 
 
 const addToDB = async () => {
-    const q = query(collection(db, "users"), where("email", "==", user?.email));
+    const q = query(collection(db, "users"), where("email", "==", email));
     const data = await getDocs(q);
     console.log(data);
     const userCollectionRef = collection(db, "users");

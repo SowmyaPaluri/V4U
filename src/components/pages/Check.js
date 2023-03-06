@@ -28,12 +28,12 @@ const Check = () => {
   const [array, changeArray] = useState([]);
   const [docID, changeDocID] = useState(0);
   const [ID, changeID] = useState(0);
-  const [size, changeSize] = useState(0);
+  // const [dis, changeDis] = useState(true)
   const collectionRef = collection(db, 'services');
   // const auth = getAuth();
   // const u = auth.currentUser;
   const q = query(collectionRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('taken', '==', false), where('active', '==', true));
-  const qsel = query(collectionRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('acceptedBy', '==', email), where('active', '==', false));
+  const qsel = query(collectionRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('acceptedBy', '==', email));
   useEffect(() => {
     if(loading) return;
     if (!user) return navigate("/logupmain");
@@ -44,12 +44,15 @@ const Check = () => {
     changeSelSer(d.docs.map((doc) => ({...doc.data(), id: doc.id})))
   };
   // console.log(u.name)s
-  changeSize(selSer.length)
+  // changeSize(selSer.length)
   console.log(selSer);
+  // console.log("sizeeeeee")
+  // console.log(size)
   getUsers(); 
+  // changeSize(selSer.length)
 
   }, [user, loading]);
-
+  // changeSize(selSer.length)
   const change = async () => {
     console.log("changed")
     const userDoc = doc(db, 'users', docID)
@@ -64,15 +67,15 @@ const Check = () => {
     // await updateDoc(serviceDoc, {});
     console.log("cccccc");
   }
-  const changeActiveT = async (id, st) =>{
-    const matchedDoc = doc(db, 'workers', id)
-    await updateDoc(matchedDoc, {active: true})
-  }
+  // const changeActiveT = async (id, st) =>{
+  //   const matchedDoc = doc(db, 'workers', id)
+  //   await updateDoc(matchedDoc, {active: true})
+  // }
 
-  const changeActiveServicesT = async (id, st) =>{
-    const matchedDoc = doc(db, 'services', id)
-    await updateDoc(matchedDoc, {active: true})
-  }
+  // const changeActiveServicesT = async (id, st) =>{
+  //   const matchedDoc = doc(db, 'services', id)
+  //   await updateDoc(matchedDoc, {active: true})
+  // }
   const changeActive = async (id, st) =>{
     console.log("jfahsdfjhsadjhfgjasdshgkjadhsgfjkahsdgkjfhakhfakhds")
     const matchedDoc = doc(db, 'workers', id)
@@ -108,14 +111,26 @@ const Check = () => {
   console.log("disabled")
   }
 
-  const assign = async (e, em, taken, d, active, wemail) => {
+  const addToHistory = async (d, key) =>{
+    const historyCollectionRef = collection(db, "bookingHistory");
+    const date = new Date();
+    if(key == true){
+    await addDoc(historyCollectionRef, {client: email, worker: d.workerEmail, type: d.type, location: d.location, service: d.service, status:"booked", time: date, salary: d.salary});
+    }
+    else{
+      await addDoc(historyCollectionRef, {client: email, worker: d.workerEmail, type: d.type, location: d.location, service: d.service, status:"declined", time: date, salary: d.salary})
+    }
+    console.log("added to istory")
+  }
+
+  const assign = async (e, em, taken, d, active, wemail, document) => {
     // var a = []
     console.log(active);
     const usersRef = collection(db, 'users');
     const servicesRef = collection(db, 'services')
     const qu = query(usersRef, where('email', '==', email));
-    const que = query(servicesRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('taken', '==', false), where('active', '==', true));
-    const decline = query(servicesRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc));
+    const que = query(servicesRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('taken', '==', false), where('active', '==', true), where('workerEmail', '==', wemail));
+    const decline = query(servicesRef, where('service', '==', service), where('type', '==', type), where('location', '==', loc), where('workerEmail', '==', wemail));
     onSnapshot(qu, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
         // console.log(doc.data().bookedServices);
@@ -126,8 +141,8 @@ const Check = () => {
   for(let i = 0; i < array.length; i++){
     if(array[i]["service"] == service && array[i]["location"] == loc && array[i]["type"] == type){
       array[i]["assignedTo"] = e;
-  array[i]["taken"] = taken;
-  console.log(array)
+      array[i]["taken"] = taken;
+      console.log(array)
     }
   }
   // array[0]["assignedTo"] = e;
@@ -158,6 +173,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
           changeActive(doc.id, active);
       })
   });
+addToHistory(document, taken);
 
 }
 
@@ -172,10 +188,10 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
       <center>
         <Card className="card" style={{ width: '70rem', padding: 20,}} hover>
           <Row>
-            <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://tse3.mm.bing.net/th?id=OIP.KiY0WJzqZ5wd9vdmXidPgwHaGl&pid=Api&P=0"/></Col>
+            <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://cdn0.iconfinder.com/data/icons/energy-industry-1/62/worker_engineer_icon_miner_helmet_builder_workman_man_job-1024.png"/></Col>
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
-                <Card.Text style={{'font-size':'50px'}}>
+                <Card.Text>
                   Worker Name: {S.workerEmail.split('@')[0]}<br/>
                   Worker Email: {S.workerEmail}<br/>
                   Phone: XXXXXXXXXX<br/>
@@ -187,7 +203,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
               </Row>
               <Row>
                 <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true, S.workerEmail)}>Decline</Button>{' '}
+                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true, S.workerEmail, S)}>Decline</Button>{' '}
                 </div>
               </Row>
 
@@ -208,7 +224,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
       <center>
         <Card className="card" style={{ width: '70rem', padding: 20,}} hover>
           <Row>
-            <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://tse3.mm.bing.net/th?id=OIP.KiY0WJzqZ5wd9vdmXidPgwHaGl&pid=Api&P=0"/></Col>
+            <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://cdn0.iconfinder.com/data/icons/energy-industry-1/62/worker_engineer_icon_miner_helmet_builder_workman_man_job-1024.png"/></Col>
             <Col xs={8}>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 <Card.Text>
@@ -224,7 +240,7 @@ const qw = query(collection(db, 'workers'), where('email', '==', wemail));
                   {/* {
                   size > ? <div></div> : <div>bye</div>
                   } */}
-                    <Button variant="success" size="lg" disabled = {size > 0} onClick={() => assign(S.workerEmail, user?.email, true, false, false, S.workerEmail)}>Accept</Button>{' '}
+                    <Button variant="success" size="lg" disabled = {selSer.length != 0} onClick={() => assign(S.workerEmail, email, true, false, false, S.workerEmail, S)}>Accept</Button>{' '}
                     {/* <Button variant="danger" size="lg" onClick={() => assign("", "", false, false, true, S.workerEmail)}>Decline</Button>{' '} */}
                 </div>
               </Row>

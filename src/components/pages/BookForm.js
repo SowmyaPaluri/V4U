@@ -19,7 +19,7 @@ import {
 
 const BookForm = () => {
   const routeChange = () =>{ 
-    let path = '/bookedservices'; 
+    let path = '/bookedservices' + '/' + user?.email; 
     navigate(path);
   }
 
@@ -52,14 +52,24 @@ useEffect(() => {
   });
 }, [user, loading]);
 
+const addToHistory = async (e) =>{
+  const historyCollectionRef = collection(db, "userHistory");
+  const date = new Date();
+  await addDoc(historyCollectionRef, {client: user?.email, type: type, location: location, service: service, status:"added", time: date});
+  console.log("added to istory");
+}
+
 const submitHandler = (e) =>{
     e.preventDefault();
     console.log(temp);
     addToDB();
+    console.log(type, location, service)
+    addToHistory(e)
     alert("Details added successfully");
-    changeService('');
-    changeType('');
-    changeLocation('');
+    // changeService('');
+    // changeType('');
+    // changeLocation('');
+    
 }
 
 
@@ -87,13 +97,13 @@ const deleteHandler = async (e) => {
 
 
 
-const check = (u) =>{
-  // console.logs
-  var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
-  // console.log(url)
-  navigate(url);
-  // < Check />
-}
+// const check = (u) =>{
+//   // console.logs
+//   var url = "/check" + "/" + u.service + "/" + u.type + "/" + u.location + "/" + user?.email;
+//   // console.log(url)
+//   navigate(url);
+//   // < Check />
+// }
 
 
 const addToDB = async () => {

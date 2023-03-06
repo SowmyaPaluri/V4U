@@ -21,8 +21,15 @@ import CheckAccepted from './components/pages/CheckAccepted';
 import ServicesAdded from './components/pages/ServicesAdded';
 import Profiles from './components/pages/Profiles';
 import { UserAuthContextProvider } from './components/pages/UserAuthContext';
+import Admin from './components/pages/Admin'
 //import Login from './components/pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminUsers from './components/pages/AdminUsers';
+import AdminWorkers from './components/pages/AdminWorkers';
+import AdminHistory from './components/pages/AdminHistory';
+import BookingHistory from './components/pages/BookingHistory';
+import WorkersHistory from './components/pages/WorkersHistory';
+import UsersHistory from './components/pages/UsersHistory';
 
 
 function App() {
@@ -42,19 +49,26 @@ function App() {
           <Route path='/adminloginmain' element={<AdminLoginMain />} />
           <Route path='/servicesIndex' element={<ServicesShown />} />
           <Route path='/book' element={<Book />} />
-          <Route path='/bookedservices' element={<BookServices />} />
-          <Route path='/servicesadded' element={<ServicesAdded />} />
+          <Route path='/bookedservices/:email' element={<BookServices />} />
+          <Route path='/servicesadded/:email' element={<ServicesAdded />} />
           <Route path='/addservice' element={<AddService />} />
           <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
           <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
           <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} />
           <Route path='/profile' element={<Profiles />} />
+          <Route path='/admin' element={<Admin />}/>
+          <Route path='/adminUsers' element={<AdminUsers />}/>
+          <Route path='/adminWorkers' element={<AdminWorkers />}/>
+          <Route path='/adminHistory' element={<AdminHistory />}/>
           {/* <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} /> */}
           <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
           <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
-
+          <Route path='/bookingHistory' element={<BookingHistory />}/>
+          <Route path='/workersHistory' element={<WorkersHistory />}/>
+          <Route path='/usersHistory' element={<UsersHistory />}/>
+          
         </Routes>
         </UserAuthContextProvider>
         
