@@ -28,6 +28,8 @@ import AdminHistory from './components/pages/AdminHistory';
 import BookingHistory from './components/pages/BookingHistory';
 import WorkersHistory from './components/pages/WorkersHistory';
 import UsersHistory from './components/pages/UsersHistory';
+import Quereis from './components/pages/Quereis';
+import AdminQueries from './components/pages/AdminQueries';
 
 function App() {
   return (
@@ -53,9 +55,11 @@ function App() {
           <Route path='/matches' element={<Matches />} />
           <Route path='/profile' element={<Profiles />} />
           <Route path='/admin' element={<Admin />}/>
+          <Route path='/queries' element={<Quereis />}/>
           <Route path='/adminUsers' element={<AdminUsers />}/>
           <Route path='/adminWorkers' element={<AdminWorkers />}/>
           <Route path='/adminHistory' element={<AdminHistory />}/>
+          <Route path='/adminQueries' element={<AdminQueries />}/>
           {/* <Route path='/logupmain' element={<LogupMain />} />
           <Route path='/matches' element={<Matches />} /> */}
           <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
