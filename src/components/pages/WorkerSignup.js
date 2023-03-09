@@ -13,10 +13,13 @@ const WorkerSignup = () => {
   const [ phone, setPhone ] = useState("");
   const [ city, setCity ] = useState("");
   const [age, setAge] = useState("");
+  const [photo, setPhoto] = useState("");
   const [aadharCard, setAadharCard] = useState(null);
   const [panCard, setPanCard] = useState(null);
   const [aadharCardUploaded, setAadharCardUploaded] = useState(false);
   const [panCardUploaded, setPanCardUploaded] = useState(false);
+  const [photoUploaded, setPhotoUploaded] = useState(false);
+  const [mediCertificateCardUploaded, setMediCertificateCardUploaded] = useState(false);
   const [medicertificate, setMediCertificateCard] = useState(null);
   const [error, setError] = useState("");
   const { signUp } = useUserAuth();
@@ -49,6 +52,10 @@ const WorkerSignup = () => {
       setError("Please fill your City");
       return;
     }
+    if (!photo) {
+      setError("Please upload your Photo in .JPG file");
+      return;
+    }
     if (!aadharCard) {
       setError("Please upload Aadhar card");
       return;
@@ -75,6 +82,12 @@ const WorkerSignup = () => {
     } else if (type === "pan") {
       inputRef.current.name = "pan";
     }
+    else if (type === 'photo') {
+      inputRef.current.name = 'photo'
+    }
+    else if (type === 'medi') {
+      inputRef.current.name = 'medi'
+    }
     inputRef.current.click();
   };
 
@@ -91,8 +104,12 @@ const WorkerSignup = () => {
       setPanCardUploaded(true);
     }
     else if (event.target.name === "medi") {
-      setPanCard(fileObj);
-      setPanCardUploaded(true);
+      setMediCertificateCard(fileObj);
+      setMediCertificateCardUploaded(true);
+    }
+    else if (event.target.name === "photo") {
+      setPhoto(fileObj);
+      setPhotoUploaded(true);
     }
     
     console.log('fileObj is', fileObj);
@@ -166,6 +183,28 @@ const WorkerSignup = () => {
                 type="file"
                 onChange={handleFileChange}
               />
+              {photoUploaded ? (
+                <p>Uploaded your Photo in .JPG: <Button variant="success" disabled>
+                Uploaded
+              </Button></p>
+              ) : (
+                <p>Upload Your Photo in .JPG:  <Button variant="secondary" onClick={() => handleClick("photo")}>
+                Upload
+              </Button></p>
+              )}
+              {!photoUploaded && (
+                  <p className="mt-2 text-danger">Please upload your Photo</p>
+                )}
+            </div>
+          </Form.Group>
+          <Form.Group className="mb-2" controlId="formBasicCity">
+            <div>
+              <input
+                style={{ display: "none" }}
+                ref={inputRef}
+                type="file"
+                onChange={handleFileChange}
+              />
               {aadharCardUploaded ? (
                 <p>Uploaded your Aadhar Card: <Button variant="success" disabled>
                 Uploaded
@@ -211,12 +250,12 @@ const WorkerSignup = () => {
                 type="file"
                 onChange={handleFileChange}
               />
-              {panCardUploaded ? (
+              {mediCertificateCardUploaded ? (
                 <p>Uploaded your Medical Certificates:  <Button variant="success" disabled>
                   Uploaded
                 </Button></p>
               ) : (
-                <p>Upload You Medical Certificates:  <Button variant="secondary" onClick={() => handleClick("pan")}>
+                <p>Upload You Medical Certificates:  <Button variant="secondary" onClick={() => handleClick("medi")}>
                 Upload
               </Button></p>
                 
