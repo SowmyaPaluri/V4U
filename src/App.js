@@ -128,49 +128,48 @@ function App() {
         } else if(state == 2002){
           return (
             <>
-        
-  //             <Router>
-  //               <NavbarWorker />
-  //               <Routes>
-  //                 <Route path='/' element={<Home />} />
-  //                 <Route path='/home' element={<Home />} />
-  //                 <Route path='/clientsignupmain' element={<ClientSignupMain />} />
-  //                 <Route path='/clientloginmain' element={<ClientLoginMain />} />
-  //                 <Route path='/workersignupmain' element={<WorkerSignupMain />} />
-  //                 <Route path='/workerloginmain' element={<WorkerLoginMain />} />
-  //                 <Route path='/adminloginmain' element={<AdminLoginMain />} />
-  //                 <Route path='/servicesIndex' element={<ServicesShown />} />
-  //                 <Route path='/book' element={<Book />} />
-  //                 <Route path='/bookedservices/:email' element={<BookServices />} />
-  //                 <Route path='/servicesadded/:email' element={<ServicesAdded />} />
-  //                 <Route path='/addservice' element={<AddService />} />
-  //                 <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
-  //                 <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
-  //                 <Route path='/logupmain' element={<LogupMain />} />
-  //                 <Route path='/matches' element={<Matches />} />
-  //                 <Route path='/profile' element={<Profiles />} />
-  //                 <Route path='/admin' element={<Admin />}/>
-  //                 <Route path='/queries' element={<Quereis />}/>
-  //                 <Route path='/adminUsers' element={<AdminUsers />}/>
-  //                 <Route path='/adminWorkers' element={<AdminWorkers />}/>
-  //                 <Route path='/adminHistory' element={<AdminHistory />}/>
-  //                 <Route path='/adminQueries' element={<AdminQueries />}/>
-  //                 {/* <Route path='/logupmain' element={<LogupMain />} />
-  //                 <Route path='/matches' element={<Matches />} /> */}
-  //                 <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
-  //                 <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
-  //                 <Route path='/bookingHistory' element={<BookingHistory />}/>
-  //                 <Route path='/workersHistory' element={<WorkersHistory />}/>
-  //                 <Route path='/usersHistory' element={<UsersHistory />}/>
-  //                 <Route path='/trail' element={<Trail />}/>
+             <Router>
+                <NavbarWorker />
+                <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/home' element={<Home />} />
+                  <Route path='/clientsignupmain' element={<ClientSignupMain />} />
+                  <Route path='/clientloginmain' element={<ClientLoginMain />} />
+                  <Route path='/workersignupmain' element={<WorkerSignupMain />} />
+                  <Route path='/workerloginmain' element={<WorkerLoginMain />} />
+                  <Route path='/adminloginmain' element={<AdminLoginMain />} />
+                  <Route path='/servicesIndex' element={<ServicesShown />} />
+                  <Route path='/book' element={<Book />} />
+                  <Route path='/bookedservices/:email' element={<BookServices />} />
+                  <Route path='/servicesadded/:email' element={<ServicesAdded />} />
+                  <Route path='/addservice' element={<AddService />} />
+                  <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
+                  <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
+                  <Route path='/logupmain' element={<LogupMain />} />
+                  <Route path='/matches' element={<Matches />} />
+                  <Route path='/profile' element={<Profiles />} />
+                  <Route path='/admin' element={<Admin />}/>
+                  <Route path='/queries' element={<Quereis />}/>
+                  <Route path='/adminUsers' element={<AdminUsers />}/>
+                  <Route path='/adminWorkers' element={<AdminWorkers />}/>
+                  <Route path='/adminHistory' element={<AdminHistory />}/>
+                  <Route path='/adminQueries' element={<AdminQueries />}/>
+                  {/* <Route path='/logupmain' element={<LogupMain />} />
+                  <Route path='/matches' element={<Matches />} /> */}
+                   <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
+                  <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
+                   <Route path='/bookingHistory' element={<BookingHistory />}/>
+                   <Route path='/workersHistory' element={<WorkersHistory />}/>
+                   <Route path='/usersHistory' element={<UsersHistory />}/>
+                   <Route path='/trail' element={<Trail />}/>
                   
   //               </Routes>
-  //             </Router>
-  //           </>
-  //         );
-  //       } else if(state == 2003){
-  //         return (
-  //           <>
+              </Router>
+            </>
+          );
+        } else if(state == 2003){
+          return (
+            <> 
         
   //             <Router>
   //               <NavbarAdmin />
@@ -210,55 +209,53 @@ function App() {
   //               </Routes>
   //             </Router>
   //           </>
-  //         );
-  //       }
+          );
+        }
+      }
+  else{
 
+    return (
+      <>
   
-  // }
-  // else{
-
-  //   return (
-  //     <>
-  
-  //       <Router>
-  //         <NavbarHome />
-  //         <Routes>
-  //           <Route path='/' element={<Home />} />
-  //           <Route path='/home' element={<Home />} />
-  //           <Route path='/clientsignupmain' element={<ClientSignupMain />} />
-  //           <Route path='/clientloginmain' element={<ClientLoginMain />} />
-  //           <Route path='/workersignupmain' element={<WorkerSignupMain />} />
-  //           <Route path='/workerloginmain' element={<WorkerLoginMain />} />
-  //           <Route path='/adminloginmain' element={<AdminLoginMain />} />
-  //           <Route path='/servicesIndex' element={<ServicesShown />} />
-  //           <Route path='/book' element={<Book />} />
-  //           <Route path='/bookedservices/:email' element={<BookServices />} />
-  //           <Route path='/servicesadded/:email' element={<ServicesAdded />} />
-  //           <Route path='/addservice' element={<AddService />} />
-  //           <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
-  //           <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
-  //           <Route path='/logupmain' element={<LogupMain />} />
-  //           <Route path='/matches' element={<Matches />} />
-  //           <Route path='/profile' element={<Profiles />} />
-  //           <Route path='/admin' element={<Admin />}/>
-  //           <Route path='/queries' element={<Quereis />}/>
-  //           <Route path='/adminUsers' element={<AdminUsers />}/>
-  //           <Route path='/adminWorkers' element={<AdminWorkers />}/>
-  //           <Route path='/adminHistory' element={<AdminHistory />}/>
-  //           <Route path='/adminQueries' element={<AdminQueries />}/>
-  //           {/* <Route path='/logupmain' element={<LogupMain />} />
-  //           <Route path='/matches' element={<Matches />} /> */}
-  //           <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
-  //           <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
-  //           <Route path='/bookingHistory' element={<BookingHistory />}/>
-  //           <Route path='/workersHistory' element={<WorkersHistory />}/>
-  //           <Route path='/usersHistory' element={<UsersHistory />}/>
-  //           <Route path='/trail' element={<Trail />}/>
+        <Router>
+          <NavbarHome />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/clientsignupmain' element={<ClientSignupMain />} />
+            <Route path='/clientloginmain' element={<ClientLoginMain />} />
+            <Route path='/workersignupmain' element={<WorkerSignupMain />} />
+            <Route path='/workerloginmain' element={<WorkerLoginMain />} />
+            <Route path='/adminloginmain' element={<AdminLoginMain />} />
+            <Route path='/servicesIndex' element={<ServicesShown />} />
+            <Route path='/book' element={<Book />} />
+            <Route path='/bookedservices/:email' element={<BookServices />} />
+            <Route path='/servicesadded/:email' element={<ServicesAdded />} />
+            <Route path='/addservice' element={<AddService />} />
+            <Route path='/UnauthorisedClient' element={<UnauthorisedClient />} />
+            <Route path='/UnauthorisedWorker' element={<UnauthorisedWorker />} />
+            <Route path='/logupmain' element={<LogupMain />} />
+            <Route path='/matches' element={<Matches />} />
+            <Route path='/profile' element={<Profiles />} />
+            <Route path='/admin' element={<Admin />}/>
+            <Route path='/queries' element={<Quereis />}/>
+            <Route path='/adminUsers' element={<AdminUsers />}/>
+            <Route path='/adminWorkers' element={<AdminWorkers />}/>
+            <Route path='/adminHistory' element={<AdminHistory />}/>
+            <Route path='/adminQueries' element={<AdminQueries />}/>
+            {/* <Route path='/logupmain' element={<LogupMain />} />
+            <Route path='/matches' element={<Matches />} /> */}
+            <Route path='/check/:service/:type/:loc/:email' element={<Check />} />
+            <Route path='/checkaccepted/:service/:type/:loc/:email' element={<CheckAccepted />} />
+            <Route path='/bookingHistory' element={<BookingHistory />}/>
+            <Route path='/workersHistory' element={<WorkersHistory />}/>
+            <Route path='/usersHistory' element={<UsersHistory />}/>
+            <Route path='/trail' element={<Trail />}/>
             
-  //         </Routes>
-  //       </Router>
-  //     </>
-  //   );
+          </Routes>
+        </Router>
+      </>
+    );
 
   }
     
