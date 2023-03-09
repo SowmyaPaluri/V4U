@@ -20,27 +20,12 @@ const AddService = () =>{
     const email = user ? user?.email: 'undefined';
     
     useEffect(() => {
-        console.log("OOOOOOOOOOOOOOOOOO")
+        
         if (loading) return;
         if (!user ) return navigate("/logupmain");
-        const collectionRef = collection(db, 'users');
-        const q = query(collectionRef, where('email', '==', email));
-        console.log(1234);
-        console.log("***********")
-        onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-            setState(doc.data().state);
-            })
-        });
-        console.log(":::::::::::::")
         const cR = collection(db, 'workers');
         const qq = query(cR, where('email', '==', email));
         console.log(1234);
-        onSnapshot(qq, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-            setState(doc.data().state);
-            })
-        });
         onSnapshot(qq, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
             changeAcceptedByAdmin(doc.data().acceptedByAdmin);
@@ -52,7 +37,7 @@ const AddService = () =>{
     console.log(state);
     console.log(acceptedByAdmin)
     console.log("-------------------------------");
-    if(state == 2002 && !acceptedByAdmin){
+    if(!acceptedByAdmin){
         return(
             <h1>Your application is still in process, You can't add services until your application gets accepted</h1>
         )
@@ -60,8 +45,7 @@ const AddService = () =>{
     else{
     return(
         <div>
-            {state == 2001 && <UnauthorisedClient />}
-            {state == 2002 && <ServiceForm />}
+            <ServiceForm />
         </div>
     )
     }

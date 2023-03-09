@@ -25,6 +25,11 @@ const Admin = () => {
     let path = '/adminUsers'; 
     navigate(path);
   }
+  const toQueries = () =>{
+    let path = '/adminQueries'; 
+    navigate(path);
+  }
+
   const toWorkers = () =>{
     let path = '/adminWorkers'; 
     navigate(path);
@@ -40,7 +45,8 @@ const Admin = () => {
       <br></br>
       <button type = "submit" onClick={toUsers}>Users</button><br></br><br></br><br></br>
       <button type = "submit" onClick={() => toWorkers()}>Workers</button><br></br><br></br><br></br>
-      <button type = "submit" onClick={() => toHistory()}>History</button><br></br>
+      <button type = "submit" onClick={() => toHistory()}>History</button><br></br><br></br><br></br>
+      <button type = "submit" onClick={() => toQueries()}>Queries</button><br></br><br></br><br></br>
     </div>
   )
 }

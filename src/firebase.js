@@ -1,6 +1,4 @@
 import { initializeApp } from "firebase/app";
-
-
 import {
   GoogleAuthProvider,
   getAuth,
@@ -18,6 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // const firebaseConfig = {
 //   apiKey: "da02f3c3f2798bb822fc94d74274301a8f69f7e5",
 //   authDomain: "weforyou2-2abd5.firebaseapp.com",
@@ -26,7 +25,6 @@ import {
 //   messagingSenderId: "109268452704670633494",
 //   appId: "1:894114212892:web:6db13f93ae923bf13243d9"
 // }
-// import firebase from 'firebase./app'
 const firebaseConfig = {
   apiKey: "AIzaSyCg2ptw2ZuvBu0qE9Jlq4pmxrT0HyasBvo",
   authDomain: "weforyou2-2abd5.firebaseapp.com",
@@ -36,7 +34,6 @@ const firebaseConfig = {
   appId: "1:995928750727:web:6c73915899d75258c71622",
   measurementId: "G-7THYK46YH0"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -95,6 +92,9 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+const storage = getStorage(app);
+
 export {
   auth,
   db,
@@ -103,5 +103,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  storage,
 };
-export default app;
