@@ -286,7 +286,7 @@ const WorkerSignup = () => {
                 onChange={handleFileChange}
               />
               {panCardUploaded ? (
-                <p>Uploaded your Pan Card<Button variant="success" disabled>
+                <p>Uploaded your Pan Card: <Button variant="success" disabled>
                   Uploaded
                 </Button></p>
               ) : (
