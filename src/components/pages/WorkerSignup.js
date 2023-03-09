@@ -4,6 +4,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "./UserAuthContext";
 import { collection, addDoc } from "firebase/firestore";
+
 import { auth, db, storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import '../../App.css';
@@ -16,15 +17,15 @@ const WorkerSignup = () => {
   const [ phone, setPhone ] = useState("");
   const [ city, setCity ] = useState("");
   const [age, setAge] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(null);
   const [aadharCard, setAadharCard] = useState(null);
   const [panCard, setPanCard] = useState(null);
+  const [medicertificate, setMediCertificateCard] = useState(null);
   const [img, setImg] = useState(null);
   const [aadharCardUploaded, setAadharCardUploaded] = useState(false);
   const [photoUploaded, setPhotoUploaded] = useState(false);
   const [panCardUploaded, setPanCardUploaded] = useState(false);
   const [imgUploaded, setImgUploaded] = useState(false);
-  const [medicertificate, setMediCertificateCard] = useState(null);
   const [mediCertificateCardUploaded, setMediCertificateCardUploaded] = useState(false);
   const [error, setError] = useState("");
   const { signUp } = useUserAuth();
