@@ -10,8 +10,9 @@ import { useParams } from 'react-router-dom'
 
 const Profiles = () => {
 
-  const email = user?.email;
+
   const [user, loading, error] = useAuthState(auth);
+  const email = user?.email;
   const [name, setName] = useState("");
   const [state, setState] = useState("");
   const [phone, setPhone] = useState("");
@@ -65,7 +66,6 @@ const Profiles = () => {
   }, [user, loading]);
 
   const workerActive = async (id, st) => {
-  const workerActive = async (id, st) => {
     const matchedDoc = doc(db, 'workers', id)
     await updateDoc(matchedDoc, { active: st })
     await updateDoc(matchedDoc, { active: st })
@@ -78,27 +78,27 @@ const Profiles = () => {
     await updateDoc(matchedDoc, { active: st })
     await updateDoc(matchedDoc, { active: st })
   }
-  const toggle = (state) => {
-    const q = query(collection(db, 'workers'), where('email', '==', email))
-    onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        workerActive(doc.id, state)
-      })
-      querySnapshot.forEach((doc) => {
-        workerActive(doc.id, state)
-      })
-    });
+  // const toggle = (state) => {
+  //   const q = query(collection(db, 'workers'), where('email', '==', email))
+  //   onSnapshot(q, (querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //       workerActive(doc.id, state)
+  //     })
+  //     querySnapshot.forEach((doc) => {
+  //       workerActive(doc.id, state)
+  //     })
+  //   });
 
 
-    const qq = query(collection(db, 'services'), where('workerEmail', '==', email))
-    onSnapshot(qq, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        serviceActive(doc.id, state)
-      })
-      querySnapshot.forEach((doc) => {
-        serviceActive(doc.id, state)
-      })
-    });
+    // const qq = query(collection(db, 'services'), where('workerEmail', '==', email))
+    // onSnapshot(qq, (querySnapshot) => {
+    //   querySnapshot.forEach((doc) => {
+    //     serviceActive(doc.id, state)
+    //   })
+    //   querySnapshot.forEach((doc) => {
+    //     serviceActive(doc.id, state)
+    //   })
+    // });
   }
 console.log(docId);
 const handleFormSubmit = async (event) => {
@@ -135,7 +135,6 @@ const handleFormSubmit = async (event) => {
       console.error("Error updating user: ", error);
     });
   }
-  
 }
 return (
    
@@ -163,15 +162,15 @@ return (
               setIsToggled(true);
               setEditMode(true);
             }}>Edit</Button>
-          </div>
-          <br /><br /><br />
-          <Box>
-            <h3>
-              <h1 className="size">{name}</h1>
-              <br /><br />
-              {state == 2001 ? <h2><b>Client</b></h2> : <div>Worker</div>}
-              <br />
-              <b>Email : </b>{email}<br /><br />
+ </div>
+        <br /><br /><br />
+        <Box>
+          <h3>
+            <h1 className="size">{name}</h1>
+            <br /><br />
+            {state == 2001 ? <h2><b>Client</b></h2> : <div>Worker</div>}
+            <br />
+            <b>Email : </b>{email}<br /><br />
             <b>Phone No. : </b>{phone}<br /><br />
           </h3>
         </Box>
@@ -179,7 +178,7 @@ return (
     )}
   </div>
   );
-
+  
   }
 
 export default Profiles;
