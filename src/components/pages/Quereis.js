@@ -16,12 +16,13 @@ const Quereis = () => {
     const [que, setQuery] = useState([]);
     const [question, setQuestion] = useState([]);
     const [user, loading, error] = useAuthState(auth);
+    const authh = !(!user);
     let navigate = useNavigate();
 
   const handleSubmit = async () => {
       const queriesCollectionRef = collection(db, "queries");
       console.log("DFASDFADSFADFADFA");
-      await addDoc(queriesCollectionRef, {by: user?.email, query: question, answeredBy: "", answered: false, answer: ""});
+      await addDoc(queriesCollectionRef, {query: question, answeredBy: "", answered: false, answer: ""});
       window.alert("added");
     
   };
@@ -34,7 +35,6 @@ const Quereis = () => {
   const q = query(collectionRef, where('answer', '!=', ''));
   useEffect(() => {
     if(loading) return;
-    if (!user) return navigate("/logupmain");
     const getUsers = async () => {
     const data = await getDocs(q);
     setQuery(data.docs.map((doc) => ({...doc.data(), id: doc.id})));

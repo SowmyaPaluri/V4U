@@ -65,7 +65,6 @@ function AdminQueries() {
           <Row>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 {/* <Card.Text> */}
-                  Asked By: {S.by}<br/>
                   Query: {S.query}<br />
                   <Form>
                     <Form.Group controlId="query">
