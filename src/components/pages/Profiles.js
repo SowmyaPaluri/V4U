@@ -3,25 +3,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import { query, collection, where, updateDoc, doc, onSnapshot } from "firebase/firestore";
-import { auth, db } from "../../firebase";
-import { query, collection, where, updateDoc, doc, onSnapshot } from "firebase/firestore";
 import Button from 'react-bootstrap/Button';
 import './Profile.css';
 import {Box} from "@mui/material";
 import { useParams } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 
 const Profiles = () => {
-  const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
-  const [state, setState] = useState("");
-  const [phone, setPhone] = useState("");
-  const [newName, setNewName] = useState("");
-  const [newPhone, setNewPhone] = useState("");
-  const [newState, setNewState] = useState("");
-  const [docId, setDocId] = useState("");
-  const [isToggled, setIsToggled] = useState(false);
-  const [editMode, setEditMode] = useState(false);
 
   const email = user?.email;
   const [user, loading, error] = useAuthState(auth);
@@ -35,7 +22,6 @@ const Profiles = () => {
   const [isToggled, setIsToggled] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
-  const email = user?.email;
   const navigate = useNavigate();
 
 
@@ -193,7 +179,9 @@ return (
     )}
   </div>
   );
-  };
+
+  }
+
 export default Profiles;
 
 
