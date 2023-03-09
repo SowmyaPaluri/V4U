@@ -3,9 +3,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import { query, collection, where, updateDoc, doc, onSnapshot } from "firebase/firestore";
+import { auth, db } from "../../firebase";
+import { query, collection, where, updateDoc, doc, onSnapshot } from "firebase/firestore";
 import Button from 'react-bootstrap/Button';
 import './Profile.css';
 import {Box} from "@mui/material";
+import { useParams } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 const Profiles = () => {
@@ -21,22 +24,41 @@ const Profiles = () => {
   const [editMode, setEditMode] = useState(false);
 
   const email = user?.email;
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const [state, setState] = useState("");
+  const [phone, setPhone] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newPhone, setNewPhone] = useState("");
+  const [newState, setNewState] = useState("");
+  const [docId, setDocId] = useState("");
+  const [isToggled, setIsToggled] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+
+  const email = user?.email;
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (loading) return;
+    if (!user) return navigate("/logupmain");
+
     if (!user) return navigate("/logupmain");
 
     const collectionRef = collection(db, 'users');
     const q = query(collectionRef, where('email', '==', email));
     onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc) => {
         setName(doc.data().name);
         setPhone(doc.data().phone);
         setState(doc.data().state);
         setDocId(doc.id);
       })
+        setDocId(doc.id);
+      })
     });
+
 
     const cR = collection(db, 'workers');
     const qq = query(cR, where('email', '==', email));
@@ -47,16 +69,27 @@ const Profiles = () => {
         setDocId(doc.id);
         setState(doc.data().state);
       })
+      querySnapshot.forEach((doc) => {
+        setName(doc.data().name);
+        setPhone(doc.data().phone);
+        setDocId(doc.id);
+        setState(doc.data().state);
+      })
     });
   }, [user, loading]);
 
   const workerActive = async (id, st) => {
+  const workerActive = async (id, st) => {
     const matchedDoc = doc(db, 'workers', id)
+    await updateDoc(matchedDoc, { active: st })
     await updateDoc(matchedDoc, { active: st })
   }
 
   const serviceActive = async (id, st) => {
+
+  const serviceActive = async (id, st) => {
     const matchedDoc = doc(db, 'services', id)
+    await updateDoc(matchedDoc, { active: st })
     await updateDoc(matchedDoc, { active: st })
   }
   const toggle = (state) => {
@@ -65,10 +98,17 @@ const Profiles = () => {
       querySnapshot.forEach((doc) => {
         workerActive(doc.id, state)
       })
+      querySnapshot.forEach((doc) => {
+        workerActive(doc.id, state)
+      })
     });
+
 
     const qq = query(collection(db, 'services'), where('workerEmail', '==', email))
     onSnapshot(qq, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        serviceActive(doc.id, state)
+      })
       querySnapshot.forEach((doc) => {
         serviceActive(doc.id, state)
       })
