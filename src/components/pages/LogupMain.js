@@ -6,14 +6,17 @@ import "../../App.css";
 import Logup from "./Logup";
 //import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
-
+import Navbar from '../NavbarHome';
 function LogupMain() {
   return (
-    <Container>
+    <div>
+      <Navbar />
+      <Container>
           <UserAuthContextProvider>
               <Logup />
           </UserAuthContextProvider>
-    </Container>
+      </Container>
+    </div>
   );
 }
 

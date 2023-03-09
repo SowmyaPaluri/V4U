@@ -38,7 +38,7 @@ const Worker2stepverf = () => {
     if (otp === "" || otp === null) return;
     try {
       await result.confirm(otp);
-      navigate("/home");
+      navigate("/addservice");
     } catch (err) {
       setError(err.message);
     }

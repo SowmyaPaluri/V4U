@@ -20,10 +20,6 @@ const WorkerSignup = () => {
   const [age, setAge] = useState("");
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
-  const routeChange = () =>{ 
-    let path = '/worker2stepverf'; 
-    navigate(path);
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +28,7 @@ const WorkerSignup = () => {
       await signUp(email, password);
       const userCollectionRef = collection(db, "workers");
       await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0, name: name, phone: phone, location: city, age: age, acceptedByAdmin: false})
-      navigate("/");
+      navigate("/worker2stepverf");
     } catch (err) {
       setError(err.message);
     }
@@ -123,7 +119,7 @@ const WorkerSignup = () => {
           </Form.Group>
 
           <div className="d-grid gap-2">
-            <Button onClick={routeChange} variant="primary" type="Submit">
+            <Button variant="primary" type="Submit">
               Sign up
             </Button>
           </div>

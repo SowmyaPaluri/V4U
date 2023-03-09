@@ -4,8 +4,10 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "./UserAuthContext";
+import Navbar from '../NavbarClient';
 
 const ClientLogin = () => {
+  <Navbar />
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

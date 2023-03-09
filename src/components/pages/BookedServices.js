@@ -17,9 +17,10 @@ import {
   ServicesH2,
   ServicesP
 }from './BookNowElements.js';
+import Navbar from '../NavbarClient';
 import { useParams } from 'react-router-dom'
 const BookedService = () => {
-
+<Navbar />
 //const [service, setService] = useState('');
 const [service, changeService] = useState();
 const [type, changeType] = useState('');

@@ -17,9 +17,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Cards.css';
+import Navbar from '../NavbarAdmin';
 
 
 const AdminUsers = () =>{
+  <Navbar />
     const [users, setUsers] = useState([]);
     const [user, loading, error] = useAuthState(auth);
     const collectionRef = collection(db, 'users');

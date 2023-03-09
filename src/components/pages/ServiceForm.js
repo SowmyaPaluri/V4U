@@ -16,10 +16,10 @@ import {
   ServicesH2,
   ServicesP
 }from './ServiceAddedElements.js';
-
+import Navbar from '../NavbarWorker';
 const ServiceForm = () => {
   
-
+<Navbar />
 const [service, changeService] = useState('');
 const [type, changeType] = useState('');
 const [salary, changeSalary] = useState('');

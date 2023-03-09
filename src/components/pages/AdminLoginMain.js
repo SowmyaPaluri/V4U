@@ -6,14 +6,17 @@ import "../../App.css";
 import AdminLogin from "./AdminLogin";
 //import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
-
+import Navbar from '../NavbarAdmin';
 function AdminLoginMain() {
   return (
-    <Container style={{ width: "400px" }}>
+    <div>
+      <Navbar />
+      <Container style={{ width: "400px" }}>
           <UserAuthContextProvider>
               <AdminLogin />
           </UserAuthContextProvider>
     </Container>
+    </div>
   );
 }
 

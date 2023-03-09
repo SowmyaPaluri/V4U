@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import './App.css';
 import Home from './components/pages/Home';
 import WorkerSignupMain from './components/pages/WorkerSignupMain';
@@ -7,7 +7,7 @@ import WorkerLoginMain from './components/pages/WorkerLoginMain';
 import Worker2stepverf from './components/pages/Worker2stepverf';
 import ClientSignupMain from './components/pages/ClientSignupMain';
 import ClientLoginMain from './components/pages/ClientLoginMain';
-import AdminLoginMain from './components/pages/ClientLoginMain';
+import AdminLoginMain from './components/pages/AdminLoginMain';
 import ServicesShown from './components/pages/ServicesIndex';
 import Book from './components/pages/Book';
 import BookServices from "./components/pages/BookedServices";
@@ -36,7 +36,6 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
         <UserAuthContextProvider>
         <Routes>
           <Route path='/' element={<Home />} />

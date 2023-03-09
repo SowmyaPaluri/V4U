@@ -16,8 +16,10 @@ import {
   ServicesH2,
   ServicesP
 }from './BookNowElements.js';
+import Navbar from '../NavbarClient';
 
 const BookForm = () => {
+  <Navbar />
   const routeChange = () =>{ 
     let path = '/bookedservices' + '/' + user?.email; 
     navigate(path);

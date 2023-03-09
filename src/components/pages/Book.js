@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import UnauthorisedWorker from './UnauthorisedWorker';
 import BookForm from "./BookForm";
 import ServiceForm from './ServiceForm';
+import Navbar from '../NavbarClient';
 
 const Book = () =>{
-    
+    <Navbar />
     const [user, loading] = useAuthState(auth);
     const [state, setState] = useState('');
     const navigate = useNavigate();

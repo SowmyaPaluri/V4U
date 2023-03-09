@@ -16,10 +16,10 @@ import {
   ServicesH2,
   ServicesP
 }from './ServiceAddedElements.js';
-
+import Navbar from '../NavbarAdmin'
 
 const Admin = () => {
-
+  <Navbar />
   const navigate = useNavigate();
   const toUsers = () =>{
     let path = '/adminUsers'; 

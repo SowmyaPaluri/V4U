@@ -4,8 +4,10 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "./UserAuthContext";
+import Navbar from '../NavbarAdmin';
 
 const AdminLogin = () => {
+  <Navbar />
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -69,9 +71,6 @@ const AdminLogin = () => {
             onClick={handleGoogleSignIn}
           />
         </div>
-      </div>
-      <div className="p-4 box mt-3 text-center">
-        Don't have an account? <Link to="/signupmain">Sign up</Link>
       </div>
     </>
   );
