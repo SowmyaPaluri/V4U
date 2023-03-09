@@ -30,6 +30,7 @@ import WorkersHistory from './components/pages/WorkersHistory';
 import UsersHistory from './components/pages/UsersHistory';
 import Quereis from './components/pages/Quereis';
 import AdminQueries from './components/pages/AdminQueries';
+import Trail from './components/pages/Trail';
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
           <Route path='/bookingHistory' element={<BookingHistory />}/>
           <Route path='/workersHistory' element={<WorkersHistory />}/>
           <Route path='/usersHistory' element={<UsersHistory />}/>
+          <Route path='/trail' element={<Trail />}/>
           
         </Routes>
       </Router>
