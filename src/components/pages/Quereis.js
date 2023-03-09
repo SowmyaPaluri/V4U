@@ -55,8 +55,8 @@ const Quereis = () => {
           <Row>
               <Row style={{paddingTop: 25, paddingLeft: 25}}>
                 {/* <Card.Text> */}
-                  Asked By: {S.by}<br/>
                   Query: {S.query}<br />
+                  Answer: {S.answer}
               </Row>
 
           </Row>
