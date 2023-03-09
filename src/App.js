@@ -119,6 +119,7 @@ function App() {
                   <Route path='/workersHistory' element={<WorkersHistory />}/>
                   <Route path='/usersHistory' element={<UsersHistory />}/>
                   <Route path='/trail' element={<Trail />}/>
+                  <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
                   
                 </Routes>
               </Router>
@@ -162,6 +163,7 @@ function App() {
                    <Route path='/workersHistory' element={<WorkersHistory />}/>
                    <Route path='/usersHistory' element={<UsersHistory />}/>
                    <Route path='/trail' element={<Trail />}/>
+                   <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
                   
                  </Routes>
               </Router>
@@ -205,7 +207,7 @@ function App() {
                    <Route path='/workersHistory' element={<WorkersHistory />}/>
                    <Route path='/usersHistory' element={<UsersHistory />}/>
                    <Route path='/trail' element={<Trail />}/>
-                  
+                   <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
                  </Routes>
                </Router>
              </>
@@ -251,7 +253,7 @@ function App() {
             <Route path='/workersHistory' element={<WorkersHistory />}/>
             <Route path='/usersHistory' element={<UsersHistory />}/>
             <Route path='/trail' element={<Trail />}/>
-            
+            <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
           </Routes>
         </Router>
       </>

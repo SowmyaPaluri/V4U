@@ -53,6 +53,14 @@ const Check = () => {
 
   }, [user, loading]);
   // changeSize(selSer.length)
+
+
+const routeChange = (s) =>{
+  // const path = 'ratings/' + s.workerEmail;
+  navigate(s.workerEmail);
+}
+
+
   const change = async () => {
     console.log("changed")
     const userDoc = doc(db, 'users', docID)
@@ -177,36 +185,37 @@ addToHistory(document, taken);
 
 }
 
-  return (
-    <div>
-      <br/>
-      <h1>Selected Worker:</h1>
-      {selSer.length == 0 && <NoMatches text = {"No Worker was selected"}/>}
-      {selSer.map((S) => {
-        return(
-          <div className = "Container">
-      <center>
-        <Card className="card" style={{ width: '70rem', padding: 20,}} hover>
-          <Row>
-            <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://cdn0.iconfinder.com/data/icons/energy-industry-1/62/worker_engineer_icon_miner_helmet_builder_workman_man_job-1024.png"/></Col>
-            <Col xs={8}>
-              <Row style={{paddingTop: 25, paddingLeft: 25}}>
-                <Card.Text>
-                  Worker Name: {S.workerEmail.split('@')[0]}<br/>
-                  Worker Email: {S.workerEmail}<br/>
-                  Phone: XXXXXXXXXX<br/>
-                  Service: {S.service}<br />
-                  Type: {S.type}<br />
-                  Location: {S.location}<br />
-                  Salary: {S.salary}<br />
-                </Card.Text>
-              </Row>
-              <Row>
-                <div className="mb-2"style={{paddingTop: 25}}>
-                    <Button variant="danger" size="lg" onClick={() => assign("", "", false, true, true, S.workerEmail, S)}>Decline</Button>{' '}
-                </div>
-              </Row>
-
+return (
+  <div>
+    <br/>
+    <h1>Selected Worker:</h1>
+    {selSer.length == 0 && <NoMatches text = {"No Worker was selected"}/>}
+    {selSer.map((S) => {
+      return(
+        <div className = "Container">
+    <center>
+      <Card className="card" style={{ width: '70rem', padding: 20,}} hover>
+        <Row>
+          <Col><Card.Img style={{height:'200px', width:'300px'}} variant="top" src="https://cdn0.iconfinder.com/data/icons/energy-industry-1/62/worker_engineer_icon_miner_helmet_builder_workman_man_job-1024.png"/></Col>
+          <Col xs={8}>
+            <Row style={{paddingTop: 25, paddingLeft: 25}}>
+              <Card.Text>
+                Worker Name: {S.workerEmail.split('@')[0]}<br/>
+                Worker Email: {S.workerEmail}<br/>
+                Phone: XXXXXXXXXX<br/>
+                Service: {S.service}<br />
+                Type: {S.type}<br />
+                Location: {S.location}<br />
+                Salary: {S.salary}<br />
+                rating: stars<br />
+              </Card.Text>
+            </Row>
+            <Row>
+              <div className="mb-2"style={{paddingTop: 25}}>
+                <Button style={{ width: "100px", height: "50px",}} className='btn btn-danger' onClick={() => assign("", "", false, true, true, S.workerEmail, S)}>Decline</Button>&nbsp;
+                <Button style={{ width: "100px", height: "50px",}} className='btn btn-success' onClick={() => (routeChange(S))}>Rate Us</Button>{' '}
+              </div>
+            </Row>
             </Col>
           </Row>
         </Card>
@@ -233,6 +242,7 @@ addToHistory(document, taken);
                   Type: {S.type}<br />
                   Location: {S.location}<br />
                   Salary: {S.salary}<br />
+                  rating: stars<br />
                 </Card.Text>
               </Row>
               <Row>
@@ -240,7 +250,7 @@ addToHistory(document, taken);
                   {/* {
                   size > ? <div></div> : <div>bye</div>
                   } */}
-                    <Button variant="success" size="lg" disabled = {selSer.length != 0} onClick={() => assign(S.workerEmail, email, true, false, false, S.workerEmail, S)}>Accept</Button>{' '}
+            <Button variant="success" size="lg" disabled = {selSer.length != 0} onClick={() => assign(S.workerEmail, email, true, false, false, S.workerEmail, S)}>Accept</Button>{' '}
                     {/* <Button variant="danger" size="lg" onClick={() => assign("", "", false, false, true, S.workerEmail)}>Decline</Button>{' '} */}
                 </div>
               </Row>
@@ -268,9 +278,11 @@ addToHistory(document, taken);
           </>  
         );
       })}
-      {matchedWorkers.length == 0 && <NoMatches text = {"No Matched Workers were Found"}/>}
+ {matchedWorkers.length == 0 && <NoMatches text = {"No Matched Workers were Found"}/>}
     </div>
   )
+
+
 }
 
 export default Check;

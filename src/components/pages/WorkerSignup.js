@@ -96,6 +96,8 @@ const WorkerSignup = () => {
       await signUp(email, password);
       const userCollectionRef = collection(db, "workers");
       await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0, name: name, phone: phone, location: city, age: age, acceptedByAdmin: false})
+      const qCR = collection(db, "rating");
+      await addDoc(qCR, {workerEmail:email, ratingSum: 0, ratingCount: 0});
       navigate("/");
     } catch (err) {
       setError(err.message);
