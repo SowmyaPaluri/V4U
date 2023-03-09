@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 // import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
-import Navbar from '../NavbarAdmin';
+
 const AdminHistory = () => {
-  <Navbar />
+
   const navigate = useNavigate();
   const toBookingHistory = () =>{
     let path = '/bookingHistory'; 

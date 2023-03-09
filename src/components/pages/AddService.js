@@ -7,10 +7,8 @@ import { useNavigate } from "react-router-dom";
 import UnauthorisedClient from './UnauthorisedClient';
 import ServiceForm from './ServiceForm';
 import NeedToAccept from "./NeedToAccept";
-import Navbar from '../NavbarWorker'
 
 const AddService = () =>{
-    <Navbar />
     const [user, loading] = useAuthState(auth);
     const [type, setType] = useState([]);
     const [state, setState] = useState('');

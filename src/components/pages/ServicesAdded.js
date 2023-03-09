@@ -12,9 +12,9 @@ import {
   ServicesCard,
 }from './ServiceAddedElements.js';
 import { useParams } from 'react-router-dom'
-import Navbar from '../NavbarWorker';
+
 const ServicesAdded = () => {
-<Navbar />
+
 const [service, changeService] = useState('');
 const [type, changeType] = useState('');
 const [salary, changeSalary] = useState('');

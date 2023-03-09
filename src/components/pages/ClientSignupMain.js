@@ -6,11 +6,11 @@ import "../../App.css";
 import ClientSignup from "./ClientSignup";
 //import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
-import Navbar from '../NavbarClient';
+
 function ClientSignupMain() {
   return (
     <div>
-      <Navbar />
+      
     <Container style={{ width: "400px" }}>
           <UserAuthContextProvider>
               <ClientSignup />

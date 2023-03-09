@@ -5,11 +5,9 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { auth, db, logout } from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot , sizeInc, deleteDoc} from "firebase/firestore";
-import Navbar from '../NavbarClient';
 
 const BookingHistory = () => {
-  <Navbar />
-
+  
     const [history, setHistory] = useState([])
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();

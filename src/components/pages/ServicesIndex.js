@@ -12,13 +12,13 @@ import {
   ServicesH2,
   ServicesP
 }from './ServicesElements.js'
-import Navbar from '../NavbarHome';
+
 
 const ServicesIndex = () => {
 
   return (
       <>
-      <Navbar />
+
       <ServicesContainer id="services">
           <ServicesH1>Our Services</ServicesH1>
           <ServicesWrapper>
