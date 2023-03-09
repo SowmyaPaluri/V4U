@@ -39,6 +39,7 @@ import {collection, query, where, onSnapshot} from 'firebase/firestore';
 import NavbarClient from './components/NavbarClient';
 import NavbarWorker from './components/NavbarWorker';
 import NavbarAdmin from './components/NavbarAdmin';
+import Ratings from './components/pages/Ratings'
 
 function App() {
 
@@ -114,6 +115,7 @@ function App() {
                   <Route path='/workersHistory' element={<WorkersHistory />}/>
                   <Route path='/usersHistory' element={<UsersHistory />}/>
                   <Route path='/trail' element={<Trail />}/>
+                  <Route path='/Ratings' element={<Ratings />} />
                   
                 </Routes>
               </Router>

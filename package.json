@@ -20,6 +20,7 @@
     "react-firebase-hooks": "^5.0.3",
     "react-google-button": "^0.7.2",
     "react-hook-form": "^7.38.0",
+    "react-icons": "^4.8.0",
     "react-phone-number-input": "^3.2.19",
     "react-router-dom": "^6.4.2",
     "react-script": "^2.0.5",

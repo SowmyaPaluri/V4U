@@ -28,7 +28,7 @@ const ClientSignup = () => {
       await signUp(email, password);
       const userCollectionRef = collection(db, "users");
       await addDoc(userCollectionRef, {email: email, state: 2001, bookedServices: [], name: name, phone: phone, location: city})
-      navigate("/addservice");
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
