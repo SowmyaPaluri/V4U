@@ -6,14 +6,15 @@ import "../../App.css";
 import Logup from "./Logup";
 //import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
-
 function LogupMain() {
   return (
-    <Container>
+    <div>
+      <Container>
           <UserAuthContextProvider>
               <Logup />
           </UserAuthContextProvider>
-    </Container>
+      </Container>
+    </div>
   );
 }
 

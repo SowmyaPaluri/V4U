@@ -17,9 +17,7 @@ import {
   ServicesP
 }from './ServiceAddedElements.js';
 
-
 const Admin = () => {
-
   const navigate = useNavigate();
   const toUsers = () =>{
     let path = '/adminUsers'; 

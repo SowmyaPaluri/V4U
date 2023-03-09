@@ -7,13 +7,17 @@ import ClientLogin from "./ClientLogin";
 //import ProtectedRoute from "./ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
 
+
 function ClientLoginMain() {
   return (
+    <div>
+      
     <Container style={{ width: "400px" }}>
           <UserAuthContextProvider>
               <ClientLogin />
           </UserAuthContextProvider>
     </Container>
+    </div>
   );
 }
 

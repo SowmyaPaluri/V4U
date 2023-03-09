@@ -7,7 +7,7 @@ import { auth, db, logout } from "../../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, addDoc, FieldValue, arrayUnion, onSnapshot , sizeInc, deleteDoc} from "firebase/firestore";
 
 const BookingHistory = () => {
-
+  
     const [history, setHistory] = useState([])
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();

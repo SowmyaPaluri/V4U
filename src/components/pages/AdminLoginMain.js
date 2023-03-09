@@ -9,11 +9,14 @@ import { UserAuthContextProvider } from "./UserAuthContext";
 
 function AdminLoginMain() {
   return (
-    <Container style={{ width: "400px" }}>
+    <div>
+      
+      <Container style={{ width: "400px" }}>
           <UserAuthContextProvider>
               <AdminLogin />
           </UserAuthContextProvider>
     </Container>
+    </div>
   );
 }
 

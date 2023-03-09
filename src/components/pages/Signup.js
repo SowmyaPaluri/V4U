@@ -10,7 +10,6 @@ import '../../App.css';
 //import LoginMain from './LoginMain';
 
 const states = {'client': 2001, 'worker': 2002, 'admin': 2003}
-
 const Signup = () => {
   const [Email, setEmail] = useState("");
   const [error, setError] = useState("");

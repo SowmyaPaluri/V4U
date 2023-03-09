@@ -9,11 +9,14 @@ import { UserAuthContextProvider } from "./UserAuthContext";
 
 function ClientSignupMain() {
   return (
+    <div>
+      
     <Container style={{ width: "400px" }}>
           <UserAuthContextProvider>
               <ClientSignup />
           </UserAuthContextProvider>
     </Container>
+    </div>
   );
 }
 

@@ -17,6 +17,7 @@ import {
   ServicesH2,
   ServicesP
 }from './BookNowElements.js';
+
 import { useParams } from 'react-router-dom'
 const BookedService = () => {
 
@@ -61,6 +62,7 @@ const addToHistory = async (e) =>{
   await addDoc(historyCollectionRef, {client: user?.email, type: e.type, location: e.location, service: e.service, status:"deleted", time: date});
   console.log("added to istory");
 }
+
 
 const deleteHandler = async (e) => {
   const q = query(collection(db, "users"), where("email", "==", email));
@@ -125,8 +127,9 @@ const addToDB = async () => {
             <div>
               <div className='row'>
                 <div className='col'>
-            <button className='btn btn-success' onClick={() => check(user)}>Check </button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-success' onClick={() => check(user)}>Check </button>&nbsp;
             <button className='btn btn-danger' onClick={() => deleteHandler(user)}>Delete</button>
+            
             </div>
               </div>
             </div>

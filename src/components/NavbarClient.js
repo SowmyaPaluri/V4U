@@ -53,7 +53,7 @@ function NavbarClient() {
                 Home
               </Link>
             </li> 
-             <li className='nav-item'>
+             {/* <li className='nav-item'>
               <Link
                 to='/ServicesIndex'
                 className='nav-links'
@@ -61,8 +61,16 @@ function NavbarClient() {
               >
                 Services
               </Link>
-            </li> 
-            
+            </li>   */}
+            <li className='nav-item'>
+              <Link
+                to='/Ratings'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Rating
+              </Link>
+            </li>
             <li className='nav-item'>
               <Link
                 to='/book'
