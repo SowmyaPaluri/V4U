@@ -16,6 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // const firebaseConfig = {
 //   apiKey: "da02f3c3f2798bb822fc94d74274301a8f69f7e5",
 //   authDomain: "weforyou2-2abd5.firebaseapp.com",
@@ -91,6 +92,9 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+const storage = getStorage(app);
+
 export {
   auth,
   db,
@@ -99,4 +103,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  storage,
 };
