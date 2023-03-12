@@ -10,6 +10,9 @@ import { useUserAuth } from "./UserAuthContext";
 import { Form, Alert } from "react-bootstrap";
 import { useParams } from 'react-router-dom';
 import { query, getDocs, where, updateDoc, doc, FieldValue, arrayUnion, onSnapshot, arrayRemove } from "firebase/firestore";
+import ReactRating from 'react-rating';
+import "./star.css"
+
 
 
 function Ratings() {
@@ -91,6 +94,20 @@ function Ratings() {
         return "Comment here...";
     }
   };
+
+  const getStars = (n) =>{
+    const stars = [];
+  for (let i = 0; i < 5; i++) {
+    if (i < n) {
+      stars.push(<span key={i} className="star active">&#9733;</span>);
+    } else {
+      stars.push(<span key={i} className="star">&#9734;</span>);
+    }
+  }
+  return stars;
+
+  }
+  
   return (
     <div className="Rating">
       <div className="popup">

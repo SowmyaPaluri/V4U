@@ -79,23 +79,19 @@ const WorkerSignup = () => {
       setError("Please upload pan card");
       return;
     }
-    // if (!img) {
-    //   setError("Please upload your image");
-    //   return;
-    // }
     // console.log(uploadImage(panCard));
     // console.log(url);
     setUrlpc(uploadImage(panCard));
     setUrlac(uploadImage(aadharCard));
-    // setUrlimg(uploadImage(img));
+    setUrlimg(uploadImage(photo));
     if(medicertificate){
       setUrlmd(uploadImage(medicertificate));
     }
-    if(urlac != "" && urlpc != ""){
+    if(urlac != "" && urlpc != "" && urlimg != ""){
     try {
       await signUp(email, password);
       const userCollectionRef = collection(db, "workers");
-      await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0, name: name, phone: phone, location: city, age: age, acceptedByAdmin: false})
+      await addDoc(userCollectionRef, {email: email, state: 2002, active: true, fullTimeCount: 0, partTimeCount: 0, name: name, phone: phone, location: city, age: age, acceptedByAdmin: false, aadhaarUrl: urlac, medUrl: urlmd, panUrl: urlpc, imgUrl: urlimg})
       const qCR = collection(db, "rating");
       await addDoc(qCR, {workerEmail:email, ratingSum: 0, ratingCount: 0});
       navigate("/");
@@ -115,7 +111,7 @@ const WorkerSignup = () => {
     } else if (type === "pan") {
       inputRef.current.name = "pan";
     }
-      // } else if (type === "img") {
+    //   } else if (type === "img") {
     //   inputRef.current.name = "img";
     // }
     else if (type === 'photo') {
@@ -160,10 +156,10 @@ const WorkerSignup = () => {
       setPanCard(fileObj);
       setPanCardUploaded(true);
     }
-    //  else if (event.target.name === "img") {
-    //   setImg(fileObj);
-    //   setImgUploaded(true);
-    // }
+     else if (event.target.name === "img") {
+      setImg(fileObj);
+      setImgUploaded(true);
+    }
     else if (event.target.name === "medi") {
       setMediCertificateCard(fileObj);
       setMediCertificateCardUploaded(true);
@@ -177,7 +173,7 @@ const WorkerSignup = () => {
     event.target.value = null;
     // console.log(event.target.files);
 
-    // // 👇️ can still access file object here
+    // // 👇 can still access file object here
     // console.log(fileObj);
     // console.log(fileObj.name);
 
@@ -303,31 +299,6 @@ const WorkerSignup = () => {
               )}
             </div>
           </Form.Group>
-          {/* <Form.Group className="mb-2" controlId="formBasicCity">
-            <div>
-              <input
-                style={{ display: "none" }}
-                ref={inputRef}
-                type="file"
-                onChange={handleFileChange}
-              />
-              {imgUploaded ? (
-                <p>Uploaded your Image<Button variant="success" disabled>
-                  Uploaded
-                </Button></p>
-              ) : (
-                <p>Upload Your Image:  <Button variant="secondary" onClick={() => handleClick("pan")}>
-                Upload
-              </Button></p>
-                
-              )}
-
-              {!imgUploaded && (
-                <p className="mt-2 text-danger">Please upload your Image</p>
-              )}
-
-            </div>
-          </Form.Group> */}
           <Form.Group className="mb-2" controlId="formBasicCity">
             <div>
               <input

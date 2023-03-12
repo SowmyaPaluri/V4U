@@ -14,6 +14,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Cards.css';
+import "./star.css";
 import NoMatches from './NoMatches';
 
 const Check = () => {
@@ -28,6 +29,10 @@ const Check = () => {
   const [array, changeArray] = useState([]);
   const [docID, changeDocID] = useState(0);
   const [ID, changeID] = useState(0);
+  const [tot, setTot] = useState(0);
+  const [cnt, setCnt] = useState(0);
+  const [num, setNum] = useState(0);
+
   // const [dis, changeDis] = useState(true)
   const collectionRef = collection(db, 'services');
   // const auth = getAuth();
@@ -60,6 +65,47 @@ const routeChange = (s) =>{
   navigate(s.workerEmail);
 }
 
+const getStars = (n) =>{
+  const stars = [];
+for (let i = 0; i < 5; i++) {
+  if (i < n) {
+    stars.push(<span key={i} className="star active">&#9733;</span>);
+  } else {
+    stars.push(<span key={i} className="star">&#9734;</span>);
+  }
+}
+return stars;
+
+}
+
+const getRating = (we) =>{
+  const colRef = collection(db, 'rating')
+  const q = query(colRef, where('workerEmail', '==', we))
+  onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      // console.log(doc.data().bookedServices);
+      setTot(doc.data().ratingSum);
+      setCnt(doc.data().ratingCount);
+      console.log(doc.id);
+    })
+    if(cnt == 0){
+      setCnt(1)
+    }
+    setNum(parseInt(tot / cnt));
+    // console.log(n);
+    // const stars = [];
+    // for (let i = 0; i < 5; i++) {
+    //   if (i < n) {
+    //     stars.push(<span key={i} className="star active">&#9733;</span>);
+    //   } else {
+    //     stars.push(<span key={i} className="star">&#9734;</span>);
+    //   }
+    // }
+    // return stars;
+    return parseInt(tot / cnt)
+});
+
+}
 
   const change = async () => {
     console.log("changed")
@@ -207,7 +253,8 @@ return (
                 Type: {S.type}<br />
                 Location: {S.location}<br />
                 Salary: {S.salary}<br />
-                rating: stars<br />
+                {getRating(S.workerEmail)}
+                rating: {getStars(num)} ({cnt - 1})<br />
               </Card.Text>
             </Row>
             <Row>
@@ -242,7 +289,8 @@ return (
                   Type: {S.type}<br />
                   Location: {S.location}<br />
                   Salary: {S.salary}<br />
-                  rating: stars<br />
+                  {getRating(S.workerEmail)}
+                  rating: {getStars(num)} ({cnt - 1})<br />
                 </Card.Text>
               </Row>
               <Row>

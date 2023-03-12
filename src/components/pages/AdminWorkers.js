@@ -12,7 +12,7 @@ import {
   ServicesCard,
 }from './ServiceAddedElements.js';
 import Card from 'react-bootstrap/Card';
-
+import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -25,8 +25,13 @@ const AdminWorkers = () => {
     const [pendingWorkers, setPendingWorkers] = useState([]);
     const [user, loading, error] = useAuthState(auth);
     const collectionRef = collection(db, 'workers');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {workerEmail} = useParams();
 
+    const routeChange = (S) =>{
+      navigate(S.email);
+    }
+    
     
     const q = query(collectionRef, where("acceptedByAdmin", "==", true));
     const q_p = query(collectionRef, where("acceptedByAdmin", "==", false));
@@ -84,7 +89,7 @@ const AdminWorkers = () => {
                     <Button variant="success" size="lg" onClick={() => accept(S.id, true)}>Accept</Button>{' '}<br></br>
                     </div>
                     <div className="col ">
-                        <Button variant="success" size="lg" >Details</Button>{' '}
+                        <Button variant="success" size="lg" onClick={() => routeChange(S)}>Details</Button>{' '}
                         </div>    <div className='col'></div>
                   </Row>
     

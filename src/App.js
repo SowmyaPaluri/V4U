@@ -40,6 +40,7 @@ import NavbarClient from './components/NavbarClient';
 import NavbarWorker from './components/NavbarWorker';
 import NavbarAdmin from './components/NavbarAdmin';
 import Ratings from './components/pages/Ratings'
+import Details from './components/pages/Details';
 
 function App() {
 
@@ -118,8 +119,9 @@ function App() {
                   <Route path='/bookingHistory' element={<BookingHistory />}/>
                   <Route path='/workersHistory' element={<WorkersHistory />}/>
                   <Route path='/usersHistory' element={<UsersHistory />}/>
-                  <Route path='/trail' element={<Trail />}/>
+                  <Route path='/adminWorkers/:workerEmail' element={<Details />}/>
                   <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
+
                   
                 </Routes>
               </Router>
@@ -162,7 +164,7 @@ function App() {
                    <Route path='/bookingHistory' element={<BookingHistory />}/>
                    <Route path='/workersHistory' element={<WorkersHistory />}/>
                    <Route path='/usersHistory' element={<UsersHistory />}/>
-                   <Route path='/trail' element={<Trail />}/>
+                   <Route path='/adminWorkers/:workerEmail' element={<Details />}/>
                    <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
                   
                  </Routes>
@@ -206,7 +208,7 @@ function App() {
                    <Route path='/bookingHistory' element={<BookingHistory />}/>
                    <Route path='/workersHistory' element={<WorkersHistory />}/>
                    <Route path='/usersHistory' element={<UsersHistory />}/>
-                   <Route path='/trail' element={<Trail />}/>
+                   <Route path='/adminWorkers/:workerEmail' element={<Details />}/>
                    <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
                  </Routes>
                </Router>
@@ -252,7 +254,7 @@ function App() {
             <Route path='/bookingHistory' element={<BookingHistory />}/>
             <Route path='/workersHistory' element={<WorkersHistory />}/>
             <Route path='/usersHistory' element={<UsersHistory />}/>
-            <Route path='/trail' element={<Trail />}/>
+            <Route path='/adminWorkers/:workerEmail' element={<Details />}/>
             <Route path='/check/:service/:type/:loc/:email/:workerEmail' element={<Ratings />}/>
           </Routes>
         </Router>
